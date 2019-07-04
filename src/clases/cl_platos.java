@@ -96,6 +96,37 @@ public class cl_platos {
         this.idclas_platos = idclas_platos;
     }
 
+    public ResultSet obtener_platos() {
+        ResultSet rsr;
+        String query = "select * "
+                + "from platos "
+                + "where idclas_platos = '" + this.idclas_platos + "' "
+                + "order by descripcion asc";
+        Statement sts = c_conectar.conexion();
+        rsr = c_conectar.consulta(sts, query);
+        return rsr;
+    }
+
+    public int total_platos() {
+        int codigo = 0;
+        try {
+            st = c_conectar.conexion();
+            String sql = "select count(*) as total "
+                    + "from platos "
+                    + "where idclas_platos = '" + this.idclas_platos + "' "
+                    + "order by descripcion asc";
+            rs = c_conectar.consulta(st, sql);
+            if (rs.next()) {
+                codigo = rs.getInt("total");
+            }
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        c_conectar.cerrar(st);
+        // c_conectar.cerrar(rs);
+        return codigo;
+    }
+
     public void ver_platos(JTable tabla, String query) {
         try {
             DefaultTableModel mostrar = new DefaultTableModel() {
@@ -126,7 +157,7 @@ public class cl_platos {
             }
 
             c_conectar.cerrar(st);
-            c_conectar.cerrar(rs);
+            //c_conectar.cerrar(rs);
             tabla.setModel(mostrar);
             tabla.getColumnModel().getColumn(0).setPreferredWidth(50);
             tabla.getColumnModel().getColumn(1).setPreferredWidth(100);
@@ -176,7 +207,7 @@ public class cl_platos {
     public boolean insertar() {
         boolean grabar = false;
         st = c_conectar.conexion();
-        String squly = "insert into platos values('" + idplatos + "','" + idclas_platos + "','" + descripcion + "','" + precio + "','" + cantidad + "')";
+        String squly = "insert into platos values('" + idplatos + "','" + descripcion + "','" + precio + "','" + cantidad + "','" + idclas_platos + "')";
         int respuesta = c_conectar.actualiza(st, squly);
         if (respuesta > -1) {
             grabar = true;
@@ -188,16 +219,16 @@ public class cl_platos {
         int codigo = 0;
         try {
             st = c_conectar.conexion();
-            String sql = "x";
+            String sql = "select ifnull(max(idplatos)+1, 1) as codigo from platos";
             rs = c_conectar.consulta(st, sql);
             if (rs.next()) {
-                idplatos = rs.getInt("idplatos");
+                idplatos = rs.getInt("codigo");
                 codigo = idplatos;
             }
         } catch (SQLException e) {
+            System.out.println(e);
         }
         c_conectar.cerrar(st);
-        c_conectar.cerrar(rs);
         return codigo;
     }
 }

@@ -114,9 +114,10 @@ public class cl_clas_platos {
                 codigo = rs.getInt("total");
             }
         } catch (SQLException e) {
+            e.getMessage();
         }
-        c_conectar.cerrar(st);
-        c_conectar.cerrar(rs);
+        //c_conectar.cerrar(st);
+      //  c_conectar.cerrar(rs);
         return codigo;
     }
 

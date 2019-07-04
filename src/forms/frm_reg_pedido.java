@@ -30,13 +30,11 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         llamar_clasificacion();
     }
 
-    private void llamar_clasificacion() {
+   private void llamar_clasificacion() {
         jPanel2.setLayout(new GridLayout(2, 6, 4, 4));
 
-        //int total_clasificacion = c_clasificacion.total_clasificaciones();
-
         JButton[] botones = new JButton[12];
-
+        
         for (int i = 0; i < 12; i++) {
             final int contar = i;
             botones[i] = new JButton("Boton_" + i);
@@ -67,16 +65,16 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
     private void llamar_platos(String id_plato) {
         jPanel1.removeAll();
         jPanel1.setLayout(new GridLayout(3, 6, 4, 4));
-
+        
         String[] comidas = new String[18];
         for (int i = 0; i < 18; i++) {
             comidas[i] = "<html><p>nombr de comida largo " + i + "</p></html>";
         }
-
+        
         System.out.println(id_plato + "este escogi");
-
+        
         JButton[] botones = new JButton[18];
-
+        
         for (int i = 0; i < 18; i++) {
             final int contar = i;
             botones[i] = new JButton("Comida_" + i);
@@ -96,6 +94,7 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
 
+                    
                 }
             });
 
@@ -127,10 +126,12 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setTitle("Agregar Pedido Mesa");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Platos"));
+        jPanel1.setPreferredSize(new java.awt.Dimension(676, 325));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -149,11 +150,11 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 660, Short.MAX_VALUE)
+            .addGap(0, 666, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 154, Short.MAX_VALUE)
+            .addGap(0, 179, Short.MAX_VALUE)
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle de Pedido"));
@@ -193,6 +194,13 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
 
         jButton4.setText("L");
 
+        jButton5.setText("Salir");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -204,10 +212,11 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                        .addComponent(jTextField1))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,7 +254,9 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5))
                 .addContainerGap())
         );
 
@@ -278,12 +289,17 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton5ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

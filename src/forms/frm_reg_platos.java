@@ -4,19 +4,26 @@
  * and open the template in the editor.
  */
 package forms;
+
 import clases.cl_platos;
 import clases.cl_varios;
 import java.awt.event.KeyEvent;
+import objetos.cl_llenar_combobox;
+import objetos.o_combobox;
+
 /**
  *
- * 
+ *
  */
 public class frm_reg_platos extends javax.swing.JInternalFrame {
 
     cl_varios c_varios = new cl_varios();
     cl_platos c_plato = new cl_platos();
+    cl_llenar_combobox c_combo = new cl_llenar_combobox();
+
     public static String accion;
     public static int id_platos;
+
     /**
      * Creates new form frm_reg_platos
      */
@@ -24,14 +31,21 @@ public class frm_reg_platos extends javax.swing.JInternalFrame {
         initComponents();
         txt_codigo.setEnabled(false);
         txt_nombre.requestFocus();
+
+        String query = "select idclas_platos as id, tipo as descripcion "
+                + "from clas_platos "
+                + "order by tipo asc";
+        c_combo.llenar_combobox(cbox_claseplatos, query);
     }
-    
-    private void llenar(){
-    
-    c_plato.setdescripcion(txt_nombre.getText());
-    c_plato.setPrecio(txt_precio.getText());
-    c_plato.setCantidad(txt_cantidad.getText());
-    
+
+    private void llenar() {
+
+        c_plato.setdescripcion(txt_nombre.getText());
+        c_plato.setPrecio(txt_precio.getText());
+        c_plato.setCantidad(txt_cantidad.getText());
+        o_combobox o_combo = (o_combobox) cbox_claseplatos.getSelectedItem();
+        c_plato.setId_clases_platos(o_combo.getId());
+
     }
 
     /**
@@ -128,46 +142,43 @@ public class frm_reg_platos extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1)
-                .addGap(58, 58, 58)
-                .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
-                .addComponent(btn_cer))
-            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(btn_reg)
+                .addGap(18, 18, 18)
+                .addComponent(btn_modificar)
+                .addGap(184, 184, 184))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_nombre)
-                            .addComponent(txt_precio)
-                            .addComponent(txt_cantidad)
-                            .addComponent(cbox_claseplatos, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_reg)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_modificar)
-                        .addGap(184, 184, 184))))
+                        .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_cer))
+                    .addComponent(txt_nombre, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_precio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_cantidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(cbox_claseplatos, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_cer, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_cer, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -197,7 +208,6 @@ public class frm_reg_platos extends javax.swing.JInternalFrame {
 
         llenar();
         c_plato.obtener_codigo();
-//        c_plato.cargar_cbx();
         c_plato.insertar();
         this.dispose();
     }//GEN-LAST:event_btn_regActionPerformed
@@ -212,16 +222,16 @@ public class frm_reg_platos extends javax.swing.JInternalFrame {
 
     private void txt_nombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombreKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-             this.txt_precio.requestFocus();
-             txt_precio.setEnabled(true);
+            this.txt_precio.requestFocus();
+            txt_precio.setEnabled(true);
 
         }
     }//GEN-LAST:event_txt_nombreKeyPressed
 
     private void txt_precioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_precioKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-             this.txt_cantidad.requestFocus();
-             txt_cantidad.setEnabled(true);
+            this.txt_cantidad.requestFocus();
+            txt_cantidad.setEnabled(true);
 
         }
     }//GEN-LAST:event_txt_precioKeyPressed

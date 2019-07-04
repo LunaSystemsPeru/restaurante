@@ -83,7 +83,7 @@ public class cl_conectar implements i_datos_bd {
             System.out.println(server + "\n");
             conexion = DriverManager.getConnection(server, user, password);
             hecho = true;
-            JOptionPane.showMessageDialog(null, "logrado");
+           // JOptionPane.showMessageDialog(null, "logrado");
         } catch (ClassNotFoundException | SQLException e) {
             JOptionPane.showMessageDialog(null, "Error! - Imposible realizar la conexion a BD. \nPongase en contacto con su administrador de Sistema");
             System.out.print(e);

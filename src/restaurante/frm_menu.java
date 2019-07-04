@@ -5,7 +5,6 @@
  */
 package restaurante;
 
-
 import clases.cl_varios;
 import forms.frm_reg_pedido;
 import forms.frm_reg_platos;
@@ -13,6 +12,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import vistas.frm_ver_clases_platos;
+import vistas.frm_ver_cliente;
 import vistas.frm_ver_documento;
 import vistas.frm_ver_empleados;
 import vistas.frm_ver_platos;
@@ -24,7 +24,9 @@ import vistas.frm_ver_proveedor;
  * @author BACA VARGAS
  */
 public class frm_menu extends javax.swing.JFrame {
-cl_varios c_varios=new cl_varios();
+
+    cl_varios c_varios = new cl_varios();
+
     public frm_menu() {
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -72,6 +74,9 @@ cl_varios c_varios=new cl_varios();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem20 = new javax.swing.JMenuItem();
         jMenuItem21 = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem22 = new javax.swing.JMenuItem();
 
         jMenuItem25.setText("jMenuItem25");
@@ -127,6 +132,11 @@ cl_varios c_varios=new cl_varios();
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/clientes2.png"))); // NOI18N
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         jToolBar2.add(jButton5);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/proveedor.png"))); // NOI18N
@@ -136,6 +146,11 @@ cl_varios c_varios=new cl_varios();
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/proveedor2.png"))); // NOI18N
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         jToolBar2.add(jButton6);
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ingreso.png"))); // NOI18N
@@ -242,6 +257,11 @@ cl_varios c_varios=new cl_varios();
         jMenu3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jMenuItem5.setText("Ver Insumos");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem5);
 
         jMenuItem6.setText("Ver Doc. Ingreso de Insumos");
@@ -287,6 +307,18 @@ cl_varios c_varios=new cl_varios();
 
         jMenuItem21.setText("Permisos de Usuario");
         jMenu5.add(jMenuItem21);
+        jMenu5.add(jSeparator3);
+
+        jMenuItem3.setText("Documentos SUNAT");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem3);
+
+        jMenuItem4.setText("Documentos Empresa");
+        jMenu5.add(jMenuItem4);
 
         jMenuItem22.setText("Respaldo de la Informacion");
         jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
@@ -333,20 +365,20 @@ cl_varios c_varios=new cl_varios();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
-   frm_ver_empleados    fr_empleados=new frm_ver_empleados();
-   c_varios.llamar_ventana(fr_empleados);
-   
+        frm_ver_empleados fr_empleados = new frm_ver_empleados();
+        c_varios.llamar_ventana(fr_empleados);
+
     }//GEN-LAST:event_jMenuItem20ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-      frm_ver_productos frm_productos=new frm_ver_productos();
-      c_varios.llamar_ventana_completa(frm_productos);
+        frm_ver_productos frm_productos = new frm_ver_productos();
+        c_varios.llamar_ventana_completa(frm_productos);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem22ActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jMenuItem22ActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -356,7 +388,7 @@ cl_varios c_varios=new cl_varios();
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        frm_reg_platos frm_plato = new  frm_reg_platos();
+        frm_reg_platos frm_plato = new frm_reg_platos();
         c_varios.llamar_ventana_completa(frm_plato);
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -366,9 +398,29 @@ cl_varios c_varios=new cl_varios();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jMenuItem24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem24ActionPerformed
-frm_ver_clases_platos formulario = new frm_ver_clases_platos();
-c_varios.llamar_ventana(formulario);
+        frm_ver_clases_platos formulario = new frm_ver_clases_platos();
+        c_varios.llamar_ventana(formulario);
     }//GEN-LAST:event_jMenuItem24ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        frm_ver_productos formulario = new frm_ver_productos();
+        c_varios.llamar_ventana(formulario);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        frm_ver_documento formulario = new frm_ver_documento();
+        c_varios.llamar_ventana(formulario);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        frm_ver_proveedor formulario = new frm_ver_proveedor();
+        c_varios.llamar_ventana(formulario);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        frm_ver_cliente formulario = new frm_ver_cliente();
+        c_varios.llamar_ventana(formulario);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -434,11 +486,14 @@ c_varios.llamar_ventana(formulario);
     private javax.swing.JMenuItem jMenuItem24;
     private javax.swing.JMenuItem jMenuItem25;
     private javax.swing.JMenuItem jMenuItem26;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JToolBar jToolBar2;
     // End of variables declaration//GEN-END:variables
 

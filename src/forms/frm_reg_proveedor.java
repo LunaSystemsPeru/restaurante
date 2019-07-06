@@ -3,7 +3,8 @@ package forms;
 
 import clases.cl_proveedor;
 import clases.cl_varios;
-import com.sun.glass.events.KeyEvent;
+import java.awt.event.KeyEvent;
+
 import vistas.frm_ver_proveedor;
 
 public class frm_reg_proveedor extends javax.swing.JInternalFrame {

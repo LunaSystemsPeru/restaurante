@@ -6,6 +6,9 @@
 package clases;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -96,7 +99,8 @@ public class cl_platos {
         this.idclas_platos = idclas_platos;
     }
 
-    public ResultSet obtener_platos() {
+    public ArrayList obtener_platos() {
+        ArrayList<ArrayList> plato=new ArrayList<>();
         ResultSet rsr;
         String query = "select * "
                 + "from platos "
@@ -104,7 +108,24 @@ public class cl_platos {
                 + "order by descripcion asc";
         Statement sts = c_conectar.conexion();
         rsr = c_conectar.consulta(sts, query);
-        return rsr;
+        
+        try {
+            while(rsr.next()){
+                int id=rsr.getInt("idplatos");
+                String descripcion=rsr.getString("descripcion");
+                double precio=rsr.getDouble("precio");
+                int cantidad=rsr.getInt("cantidad");
+                ArrayList fila_plato=new ArrayList();
+                fila_plato.add(id);
+                fila_plato.add(descripcion);
+                fila_plato.add(precio);
+                fila_plato.add(cantidad);
+                plato.add(fila_plato);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return plato;
     }
 
     public int total_platos() {

@@ -6,6 +6,9 @@
 package clases;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowSorter;
@@ -24,6 +27,8 @@ public class cl_clas_platos {
     private String tipo;
     private Statement st;
     private ResultSet rs;
+
+    
 
     /**
      * @return the idclas_platos
@@ -94,14 +99,29 @@ public class cl_clas_platos {
         return modificar;
     }
 
-    public ResultSet obtener_clasificaciones() {
+    public ArrayList obtener_clasificaciones() {
+        ArrayList<ArrayList> clas_plato=new ArrayList<>();
+        
         ResultSet rsr;
         String query = "select * "
                 + "from clas_platos "
                 + "order by tipo asc";
         Statement sts = c_conectar.conexion();
         rsr = c_conectar.consulta(sts, query);
-        return rsr;
+        try {
+            while(rsr.next()){
+                int id=rsr.getInt("idclas_platos");
+                String nombre=rsr.getString("tipo");
+                ArrayList fila_clase=new ArrayList();
+                fila_clase.add(id);
+                fila_clase.add(nombre);
+                clas_plato.add(fila_clase);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        
+        return clas_plato;
     }
     
     public int total_clasificaciones() {

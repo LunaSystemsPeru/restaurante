@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JButton;
 
 /**
@@ -34,8 +35,11 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         jPanel2.setLayout(new GridLayout(2, 6, 4, 4));
 
         JButton[] botones = new JButton[12];
+        ArrayList<ArrayList> clas_plato=this.c_clasificacion.obtener_clasificaciones();
+        int diferencia=12-clas_plato.size();
+        System.out.println(diferencia);
         
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < clas_plato.size(); i++) {
             final int contar = i;
             botones[i] = new JButton("Boton_" + i);
 
@@ -43,7 +47,8 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
 
             botones[i].setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
 
-            botones[i].setText("Boton_" + i);
+            botones[i].setText(clas_plato.get(i).get(1).toString());
+            String id_clas=clas_plato.get(i).get(0).toString();
 
             botones[i].setContentAreaFilled(false);
 
@@ -54,24 +59,66 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
 
-                    llamar_platos(contar + "");
+                    llamar_platos(id_clas);
+                    
                 }
             });
 
             jPanel2.add(botones[i]);
         }
+        
+        for (int i = 0; i < diferencia; i++) {
+            final int contar = i;
+            botones[i] = new JButton("Boton_" + i);
+
+            botones[i].setBackground(new java.awt.Color(204, 204, 204));
+
+            botones[i].setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+
+            botones[i].setText("");
+
+            botones[i].setContentAreaFilled(false);
+
+            botones[i].setSize(100, 50);
+            botones[i].setPreferredSize(new Dimension(100, 50));
+            botones[i].setEnabled(false);
+
+            /*botones[i].addActionListener(new java.awt.event.ActionListener() {
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+
+                    llamar_platos(contar + "");
+                }
+            });*/
+
+            jPanel2.add(botones[i]);
+        }
     }
 
-    private void llamar_platos(String id_plato) {
+    private void llamar_platos(String id_tipo) {
         jPanel1.removeAll();
         jPanel1.setLayout(new GridLayout(3, 6, 4, 4));
-        
+        this.c_plato.setId_clases_platos(Integer.parseInt(id_tipo));
+        ArrayList<ArrayList> plato=this.c_plato.obtener_platos();
         String[] comidas = new String[18];
+        String n_plato="";
+        boolean[] enable=new boolean[18];
+        int id_plato[]=new int[18];
         for (int i = 0; i < 18; i++) {
-            comidas[i] = "<html><p>nombr de comida largo " + i + "</p></html>";
+            if(i<plato.size()){
+                n_plato=plato.get(i).get(1).toString();
+                comidas[i] = "<html><p> " + n_plato + "</p></html>";
+                enable[i]=true;
+                id_plato[i]=Integer.parseInt(plato.get(i).get(0).toString());                
+            }else{
+                n_plato=i+"";
+                comidas[i] = "<html><p> Boton desactivado" + n_plato + "</p></html>";
+                enable[i]=false;
+                id_plato[i]=0;
+            }
+   
         }
         
-        System.out.println(id_plato + "este escogi");
         
         JButton[] botones = new JButton[18];
         
@@ -89,11 +136,13 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
 
             botones[i].setSize(100, 70);
             botones[i].setPreferredSize(new Dimension(100, 70));
-
+            botones[i].setEnabled(enable[i]);
+            int idplato=id_plato[i];
             botones[i].addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
 
+                    llamar_agregar_plato(idplato);
                     
                 }
             });
@@ -103,6 +152,13 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         jPanel1.repaint();
     }
 
+    private void llamar_agregar_plato(int id_plato){
+        this.c_plato.setIdplatos(id_plato);
+        this.c_plato.obtener_datos();
+        System.out.println("El plato seleccionado es: "+ this.c_plato.getNombre()+" y su costo es: " + this.c_plato.getPrecio());
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

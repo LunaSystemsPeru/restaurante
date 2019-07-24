@@ -2,6 +2,7 @@
 package clases;
 import java.sql.*;
 import clases.cl_conectar;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowSorter;
@@ -175,6 +176,30 @@ public class cl_mesas {
             System.out.println(ex);
             JOptionPane.showMessageDialog(null, ex);
         }
+    }
+    
+    public ArrayList obtener_mesass() {
+        ArrayList<ArrayList> clas_mesa=new ArrayList<>();
+        
+        ResultSet rsr;
+        String query = "select * "
+                + "from mesa ";
+        Statement sts = c_conectar.conexion();
+        rsr = c_conectar.consulta(sts, query);
+        try {
+            while(rsr.next()){
+                int id=rsr.getInt("idmesa");
+                int est=rsr.getInt("estado");
+                ArrayList fila_mesa=new ArrayList();
+                fila_mesa.add(id);
+                fila_mesa.add(est);
+                clas_mesa.add(fila_mesa);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        
+        return clas_mesa;
     }
     
 //    public boolean eliminar (){

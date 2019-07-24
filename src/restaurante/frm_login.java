@@ -66,6 +66,7 @@ public class frm_login extends javax.swing.JFrame {
         });
         jPanel1.add(txt_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 168, 170, 30));
 
+        txt_pass.setText("clave");
         txt_pass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_passKeyPressed(evt);

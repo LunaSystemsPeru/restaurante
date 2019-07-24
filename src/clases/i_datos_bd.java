@@ -21,5 +21,5 @@ public interface i_datos_bd {
     String bd = "restaurante";
     String user = "root_lsp";
     String password = "root/*123";
-    String servidor = "192.168.1.41";
+    String servidor = "192.168.1.11";
 }

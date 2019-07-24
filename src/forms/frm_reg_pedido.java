@@ -5,14 +5,16 @@
  */
 package forms;
 
-import clases.cl_clas_platos;
-import clases.cl_platos;
+import clases.*;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.*;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.JButton;
+import javax.swing.*;
 
 /**
  *
@@ -21,6 +23,7 @@ import javax.swing.JButton;
 public class frm_reg_pedido extends javax.swing.JInternalFrame {
 
     cl_clas_platos c_clasificacion = new cl_clas_platos();
+    cl_mesas c_mesa = new cl_mesas();
     cl_platos c_plato = new cl_platos();
 
     /**
@@ -28,17 +31,67 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
      */
     public frm_reg_pedido() {
         initComponents();
+        llamar_dialog_mesa();
         llamar_clasificacion();
     }
 
-   private void llamar_clasificacion() {
+    private void llamar_dialog_mesa() {
+        jd_mesa.setModal(true);
+        jd_mesa.setSize(800, 400);
+        llamar_mesas();
+        jd_mesa.setLocationRelativeTo(null);
+        jd_mesa.setVisible(true);
+
+    }
+
+    private void llamar_mesas() {
+        //Creacion de botones
+        ArrayList<ArrayList> clas_mesa = this.c_mesa.obtener_mesass();
+        JButton boton[] = new JButton[20];
+
+        for (int i = 0; i < 20; i++) {
+            boton[i] = new JButton(String.valueOf(i + 1));
+            boton[i].setFont(new Font("Arial", Font.BOLD, 18));
+            boton[i].setOpaque(true);
+            boton[i].setHorizontalTextPosition(SwingConstants.CENTER);
+            boton[i].setVerticalTextPosition(SwingConstants.CENTER);
+        }
+        jd_mesa.setLayout(new GridLayout(5, 4, 4, 4));
+
+        for (int i = 0; i < 20; i++) {
+            jd_mesa.add(boton[i]);
+            if (i >= clas_mesa.size()) {
+                boton[i].setEnabled(false);
+                boton[i].addActionListener(new java.awt.event.ActionListener() {
+                    @Override
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                        
+                    }
+                });
+            }
+
+        }
+        for (int i = 0; i < clas_mesa.size(); i++) {
+            if ("1".equals(clas_mesa.get(i).get(1).toString())) {
+                boton[i].setBackground(Color.red);
+                boton[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/mesa_libre.png")));
+            } else {
+                boton[i].setBackground(Color.GREEN);
+                boton[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/mesa_ocupada.png")));
+            }
+        }
+    }
+    
+
+
+    private void llamar_clasificacion() {
         jPanel2.setLayout(new GridLayout(2, 6, 4, 4));
 
         JButton[] botones = new JButton[12];
-        ArrayList<ArrayList> clas_plato=this.c_clasificacion.obtener_clasificaciones();
-        int diferencia=12-clas_plato.size();
+        ArrayList<ArrayList> clas_plato = this.c_clasificacion.obtener_clasificaciones();
+        int diferencia = 12 - clas_plato.size();
         System.out.println(diferencia);
-        
+
         for (int i = 0; i < clas_plato.size(); i++) {
             final int contar = i;
             botones[i] = new JButton("Boton_" + i);
@@ -48,7 +101,7 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
             botones[i].setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
 
             botones[i].setText(clas_plato.get(i).get(1).toString());
-            String id_clas=clas_plato.get(i).get(0).toString();
+            String id_clas = clas_plato.get(i).get(0).toString();
 
             botones[i].setContentAreaFilled(false);
 
@@ -60,13 +113,13 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
 
                     llamar_platos(id_clas);
-                    
+
                 }
             });
 
             jPanel2.add(botones[i]);
         }
-        
+
         for (int i = 0; i < diferencia; i++) {
             final int contar = i;
             botones[i] = new JButton("Boton_" + i);
@@ -90,7 +143,6 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
                     llamar_platos(contar + "");
                 }
             });*/
-
             jPanel2.add(botones[i]);
         }
     }
@@ -99,29 +151,28 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         jPanel1.removeAll();
         jPanel1.setLayout(new GridLayout(3, 6, 4, 4));
         this.c_plato.setId_clases_platos(Integer.parseInt(id_tipo));
-        ArrayList<ArrayList> plato=this.c_plato.obtener_platos();
+        ArrayList<ArrayList> plato = this.c_plato.obtener_platos();
         String[] comidas = new String[18];
-        String n_plato="";
-        boolean[] enable=new boolean[18];
-        int id_plato[]=new int[18];
+        String n_plato = "";
+        boolean[] enable = new boolean[18];
+        int id_plato[] = new int[18];
         for (int i = 0; i < 18; i++) {
-            if(i<plato.size()){
-                n_plato=plato.get(i).get(1).toString();
+            if (i < plato.size()) {
+                n_plato = plato.get(i).get(1).toString();
                 comidas[i] = "<html><p> " + n_plato + "</p></html>";
-                enable[i]=true;
-                id_plato[i]=Integer.parseInt(plato.get(i).get(0).toString());                
-            }else{
-                n_plato=i+"";
+                enable[i] = true;
+                id_plato[i] = Integer.parseInt(plato.get(i).get(0).toString());
+            } else {
+                n_plato = i + "";
                 comidas[i] = "<html><p> Boton desactivado" + n_plato + "</p></html>";
-                enable[i]=false;
-                id_plato[i]=0;
+                enable[i] = false;
+                id_plato[i] = 0;
             }
-   
+
         }
-        
-        
+
         JButton[] botones = new JButton[18];
-        
+
         for (int i = 0; i < 18; i++) {
             final int contar = i;
             botones[i] = new JButton("Comida_" + i);
@@ -137,13 +188,13 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
             botones[i].setSize(100, 70);
             botones[i].setPreferredSize(new Dimension(100, 70));
             botones[i].setEnabled(enable[i]);
-            int idplato=id_plato[i];
+            int idplato = id_plato[i];
             botones[i].addActionListener(new java.awt.event.ActionListener() {
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt) {
 
                     llamar_agregar_plato(idplato);
-                    
+
                 }
             });
 
@@ -152,13 +203,13 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         jPanel1.repaint();
     }
 
-    private void llamar_agregar_plato(int id_plato){
+    private void llamar_agregar_plato(int id_plato) {
         this.c_plato.setIdplatos(id_plato);
         this.c_plato.obtener_datos();
-        System.out.println("El plato seleccionado es: "+ this.c_plato.getNombre()+" y su costo es: " + this.c_plato.getPrecio());
-        
+        System.out.println("El plato seleccionado es: " + this.c_plato.getNombre() + " y su costo es: " + this.c_plato.getPrecio());
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -168,6 +219,7 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jd_mesa = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -183,6 +235,19 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+
+        jd_mesa.setTitle("Seleccione la Mesa");
+
+        javax.swing.GroupLayout jd_mesaLayout = new javax.swing.GroupLayout(jd_mesa.getContentPane());
+        jd_mesa.getContentPane().setLayout(jd_mesaLayout);
+        jd_mesaLayout.setHorizontalGroup(
+            jd_mesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 301, Short.MAX_VALUE)
+        );
+        jd_mesaLayout.setVerticalGroup(
+            jd_mesaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 181, Short.MAX_VALUE)
+        );
 
         setTitle("Agregar Pedido Mesa");
 
@@ -245,8 +310,10 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         jLabel4.setText("S/ 130.00");
 
         jButton2.setText("E");
+        jButton2.setBorder(null);
 
         jButton3.setText("D");
+        jButton3.setHideActionText(true);
 
         jButton4.setText("L");
 
@@ -301,7 +368,7 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -324,7 +391,7 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -338,7 +405,7 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -366,5 +433,6 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JDialog jd_mesa;
     // End of variables declaration//GEN-END:variables
 }

@@ -21,6 +21,7 @@ public class Restaurante {
         // TODO code application logic here
         JFrame.setDefaultLookAndFeelDecorated(true);
         SubstanceLookAndFeel.setSkin("org.jvnet.substance.skin.BusinessBlackSteelSkin");
+        
         frm_login login=new frm_login();
         login.setLocationRelativeTo(null);
         login.setVisible(true);

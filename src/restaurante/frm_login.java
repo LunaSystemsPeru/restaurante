@@ -74,7 +74,7 @@ public class frm_login extends javax.swing.JFrame {
         });
         jPanel1.add(txt_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 222, 170, 30));
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 255));
+        jButton1.setBackground(new java.awt.Color(0, 204, 204));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setText("Iniciar");
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 220, 40));
@@ -154,7 +154,7 @@ public class frm_login extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }

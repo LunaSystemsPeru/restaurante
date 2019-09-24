@@ -21,15 +21,15 @@ public class frm_reg_mesa extends javax.swing.JInternalFrame {
      */
     public frm_reg_mesa() {
         initComponents();
-        txt_codigo.setEnabled(false);
+      
         txt_numero.requestFocus();
     }
     
     private void llenar(){
         
         c_mesa.setNumero(Integer.parseInt(txt_numero.getText()));
-        c_mesa.setEstado(Integer.parseInt(txt_estado.getText()));
-        c_mesa.setNumerosillas(Integer.parseInt(txt_sillas.getText()));
+//        c_mesa.setEstado(Integer.parseInt(txt_estado.getText()));
+//        c_mesa.setNumerosillas(Integer.parseInt(txt_sillas.getText()));
     }
 
     /**
@@ -41,25 +41,16 @@ public class frm_reg_mesa extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        txt_codigo = new javax.swing.JTextField();
         txt_numero = new javax.swing.JTextField();
-        txt_estado = new javax.swing.JTextField();
-        txt_sillas = new javax.swing.JTextField();
+        jToolBar1 = new javax.swing.JToolBar();
         btn_reg = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
         btn_cer = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
-        jLabel1.setText("Codigo");
+        setTitle("Registro Mesa");
 
         jLabel2.setText("Numero");
-
-        jLabel3.setText("Estado");
-
-        jLabel4.setText("Nu_sillas");
 
         txt_numero.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -67,26 +58,13 @@ public class frm_reg_mesa extends javax.swing.JInternalFrame {
             }
         });
 
-        txt_estado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_estadoActionPerformed(evt);
-            }
-        });
-        txt_estado.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_estadoKeyPressed(evt);
-            }
-        });
-
-        txt_sillas.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_sillasKeyPressed(evt);
-            }
-        });
+        jToolBar1.setRollover(true);
 
         btn_reg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/add.png"))); // NOI18N
         btn_reg.setText("Registrar");
         btn_reg.setEnabled(false);
+        btn_reg.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_reg.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btn_reg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_regActionPerformed(evt);
@@ -97,90 +75,46 @@ public class frm_reg_mesa extends javax.swing.JInternalFrame {
                 btn_regKeyPressed(evt);
             }
         });
+        jToolBar1.add(btn_reg);
+        jToolBar1.add(jSeparator1);
 
         btn_cer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/cancel.png"))); // NOI18N
         btn_cer.setText("Cerrar");
         btn_cer.setFocusable(false);
+        btn_cer.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_cer.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btn_cer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cerActionPerformed(evt);
             }
         });
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/arrow_redo.png"))); // NOI18N
-        jButton1.setText("Modificar");
-        jButton1.setEnabled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        jToolBar1.add(btn_cer);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(45, 45, 45)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_numero, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                                    .addComponent(txt_estado)
-                                    .addComponent(txt_sillas))
-                                .addContainerGap())
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
-                                .addComponent(btn_cer))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_reg)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(txt_numero, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btn_cer, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_numero, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_sillas, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_reg, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txt_numero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txt_estadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_estadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_estadoActionPerformed
 
     private void btn_regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regActionPerformed
         btn_reg.setEnabled(false);
@@ -202,48 +136,19 @@ public class frm_reg_mesa extends javax.swing.JInternalFrame {
     private void txt_numeroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_numeroKeyPressed
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-             this.txt_estado.requestFocus();
-             txt_estado.setEnabled(true);
+//             this.txt_estado.requestFocus();
+//             txt_estado.setEnabled(true);
 
         }
     }//GEN-LAST:event_txt_numeroKeyPressed
-
-    private void txt_estadoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_estadoKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-             this.txt_sillas.requestFocus();
-             txt_sillas.setEnabled(true);
-
-        }
-    }//GEN-LAST:event_txt_estadoKeyPressed
-
-    private void txt_sillasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_sillasKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            btn_reg.setEnabled(true);
-            btn_reg.requestFocus();
-        }
-    }//GEN-LAST:event_txt_sillasKeyPressed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        llenar();
-        c_mesa.modificar();
-        this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cer;
     public static javax.swing.JButton btn_reg;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField txt_codigo;
-    private javax.swing.JTextField txt_estado;
+    private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTextField txt_numero;
-    private javax.swing.JTextField txt_sillas;
     // End of variables declaration//GEN-END:variables
 }

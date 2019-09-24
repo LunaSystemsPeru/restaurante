@@ -7,8 +7,6 @@ package clases;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowSorter;
@@ -23,26 +21,24 @@ import javax.swing.table.TableRowSorter;
 public class cl_clas_platos {
 
     cl_conectar c_conectar = new cl_conectar();
-    private int idclas_platos;
+
+    private int id;
     private String tipo;
     private Statement st;
     private ResultSet rs;
 
+    public cl_clas_platos() {
+    }
     
-
-    /**
-     * @return the idclas_platos
-     */
-    public int getIdclas_platos() {
-        return idclas_platos;
+    
+    public int getId() {
+        return id;
     }
 
-    /**
-     * @param idclas_platos the idclas_platos to set
-     */
-    public void setIdclas_platos(int idclas_platos) {
-        this.idclas_platos = idclas_platos;
+    public void setId(int id) {
+        this.id = id;
     }
+
 
     /**
      * @return the tipo
@@ -58,21 +54,21 @@ public class cl_clas_platos {
         this.tipo = tipo;
     }
 
-    public boolean cargar() {
+    public boolean obtenerDatos() {
         boolean existe = false;
         try {
             st = c_conectar.conexion();
-            String query = "select * from clas_platos where idclas_platos = '" + idclas_platos + "'";
+            String query = "select * from clas_platos where idclas_platos = '" + id + "'";
             rs = c_conectar.consulta(st, query);
             if (rs.next()) {
-                idclas_platos = rs.getInt("idclas_platos");
+                id = rs.getInt("idclas_platos");
                 tipo = rs.getString("tipo");
                 existe = true;
 
             }
             c_conectar.cerrar(rs);
             c_conectar.cerrar(st);
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e.getLocalizedMessage());
         }
         return existe;
@@ -81,7 +77,7 @@ public class cl_clas_platos {
     public boolean insertar() {
         boolean grabar = false;
         st = c_conectar.conexion();
-        String sql = "INSERT INTO clas_platos VALUES ('" + idclas_platos + "','" + tipo + "')";
+        String sql = "INSERT INTO clas_platos VALUES ('" + id + "','" + tipo + "')";
         int respuesta = c_conectar.actualiza(st, sql);
         if (respuesta > -1) {
             grabar = true;
@@ -91,7 +87,7 @@ public class cl_clas_platos {
 
     public boolean modificar() {
         boolean modificar = false;
-        String sql = "update clas_platos settipo = '" + tipo + "' where idclas_platos = '" + idclas_platos + "'";
+        String sql = "update clas_platos settipo = '" + tipo + "' where idclas_platos = '" + id + "'";
         int respuesta = c_conectar.actualiza(st, sql);
         if (respuesta > -1) {
             modificar = true;
@@ -100,8 +96,8 @@ public class cl_clas_platos {
     }
 
     public ArrayList obtener_clasificaciones() {
-        ArrayList<ArrayList> clas_plato=new ArrayList<>();
-        
+        ArrayList<ArrayList> clas_plato = new ArrayList<>();
+
         ResultSet rsr;
         String query = "select * "
                 + "from clas_platos "
@@ -109,21 +105,21 @@ public class cl_clas_platos {
         Statement sts = c_conectar.conexion();
         rsr = c_conectar.consulta(sts, query);
         try {
-            while(rsr.next()){
-                int id=rsr.getInt("idclas_platos");
-                String nombre=rsr.getString("tipo");
-                ArrayList fila_clase=new ArrayList();
-                fila_clase.add(id);
+            while (rsr.next()) {
+                int iid = rsr.getInt("idclas_platos");
+                String nombre = rsr.getString("tipo");
+                ArrayList fila_clase = new ArrayList();
+                fila_clase.add(iid);
                 fila_clase.add(nombre);
                 clas_plato.add(fila_clase);
             }
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        
+
         return clas_plato;
     }
-    
+
     public int total_clasificaciones() {
         int codigo = 0;
         try {
@@ -137,7 +133,7 @@ public class cl_clas_platos {
             e.getMessage();
         }
         //c_conectar.cerrar(st);
-      //  c_conectar.cerrar(rs);
+        //  c_conectar.cerrar(rs);
         return codigo;
     }
 
@@ -149,10 +145,10 @@ public class cl_clas_platos {
                     return false;
                 }
             };
-            Statement st = c_conectar.conexion();
-            ResultSet rs = c_conectar.consulta(st, query);
+            st = c_conectar.conexion();
+            rs = c_conectar.consulta(st, query);
 
-            RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(mostrar);
+            RowSorter<TableModel> sorter = new TableRowSorter<>(mostrar);
             tabla.setRowSorter(sorter);
 
             mostrar.addColumn("idclas_platos");
@@ -177,17 +173,17 @@ public class cl_clas_platos {
         }
     }
 
-    public int obtener_codigo() {
+    public int generarCodigo() {
         int codigo = 0;
         try {
             st = c_conectar.conexion();
             String sql = "select ifnull(max(idclas_platos)+1, 1) as idclas_platos from clas_platos";
             rs = c_conectar.consulta(st, sql);
             if (rs.next()) {
-                idclas_platos = rs.getInt("idclas_platos");
-                codigo = idclas_platos;
+                id = rs.getInt("idclas_platos");
+                codigo = id;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         c_conectar.cerrar(st);
         c_conectar.cerrar(rs);

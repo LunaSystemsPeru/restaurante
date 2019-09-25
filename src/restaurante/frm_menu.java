@@ -11,13 +11,14 @@ import forms.frm_reg_platos;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
-import vistas.frm_ver_clases_platos;
-import vistas.frm_ver_cliente;
-import vistas.frm_ver_documento;
-import vistas.frm_ver_empleados;
-import vistas.frm_ver_platos;
-import vistas.frm_ver_productos;
-import vistas.frm_ver_proveedor;
+import vistas.*;
+//import vistas.frm_ver_cliente;
+//import vistas.frm_ver_documento;
+//import vistas.frm_ver_empleados;
+//import vistas.frm_ver_mesas;
+//import vistas.frm_ver_platos;
+//import vistas.frm_ver_productos;
+//import vistas.frm_ver_proveedor;
 
 /**
  *
@@ -42,6 +43,7 @@ public class frm_menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem25 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jToolBar2 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -76,10 +78,13 @@ public class frm_menu extends javax.swing.JFrame {
         jMenuItem21 = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem22 = new javax.swing.JMenuItem();
 
         jMenuItem25.setText("jMenuItem25");
+
+        jMenuItem7.setText("jMenuItem7");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Software Ventas Rest - LUNASYSTEMS PERU");
@@ -248,6 +253,11 @@ public class frm_menu extends javax.swing.JFrame {
         jMenu6.add(jMenuItem24);
 
         jMenuItem26.setText("Platos");
+        jMenuItem26.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem26ActionPerformed(evt);
+            }
+        });
         jMenu6.add(jMenuItem26);
 
         jMenuBar1.add(jMenu6);
@@ -315,6 +325,14 @@ public class frm_menu extends javax.swing.JFrame {
             }
         });
         jMenu5.add(jMenuItem3);
+
+        jMenuItem8.setText("Mesas");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem8);
 
         jMenuItem4.setText("Documentos Empresa");
         jMenu5.add(jMenuItem4);
@@ -421,6 +439,16 @@ public class frm_menu extends javax.swing.JFrame {
         c_varios.llamar_ventana(formulario);
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+        frm_ver_mesas formulario = new frm_ver_mesas();
+        c_varios.llamar_ventana(formulario);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem26ActionPerformed
+        frm_ver_platos formulario = new frm_ver_platos();
+        c_varios.llamar_ventana(formulario);
+    }//GEN-LAST:event_jMenuItem26ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -489,6 +517,8 @@ public class frm_menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;

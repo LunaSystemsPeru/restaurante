@@ -24,14 +24,13 @@ public class cl_clas_platos {
 
     private int id;
     private String tipo;
-    
+
     private Statement st;
     private ResultSet rs;
 
     public cl_clas_platos() {
     }
-    
-    
+
     public int getId() {
         return id;
     }
@@ -39,7 +38,6 @@ public class cl_clas_platos {
     public void setId(int id) {
         this.id = id;
     }
-
 
     /**
      * @return the tipo
@@ -88,11 +86,13 @@ public class cl_clas_platos {
 
     public boolean modificar() {
         boolean modificar = false;
-        String sql = "update clas_platos settipo = '" + tipo + "' where idclas_platos = '" + id + "'";
+        st = c_conectar.conexion();
+        String sql = "update clas_platos SET tipo = '" + tipo + "' where idclas_platos = '" + id + "'";
         int respuesta = c_conectar.actualiza(st, sql);
         if (respuesta > -1) {
             modificar = true;
         }
+
         return modificar;
     }
 

@@ -4,32 +4,46 @@
  * and open the template in the editor.
  */
 package forms;
+
 import clases.cl_mesas;
 import clases.cl_varios;
 import java.awt.event.KeyEvent;
+import vistas.*;
+
 /**
  *
- * 
+ *
  */
 public class frm_reg_mesa extends javax.swing.JInternalFrame {
-    cl_mesas c_mesa= new cl_mesas();
+
+    cl_mesas c_mesa = new cl_mesas();
     cl_varios c_varios = new cl_varios();
     public static String accion;
+    //boolean registrar;
     public static int id_mesa;
+
     /**
      * Creates new form frm_reg_mesa
      */
     public frm_reg_mesa() {
         initComponents();
-      
+        if (accion.equals("modificar")) {
+            c_mesa.setIdmesa(id_mesa);
+            c_mesa.cargar();
+            txt_numero.setText(c_mesa.getNumero() + "");
+            txt_num_sillas.setValue(c_mesa.getNumerosillas());
+        }
         txt_numero.requestFocus();
     }
-    
-    private void llenar(){
-        
+
+    private void llenar() {
+        if (accion.equals("registrar")) {
+            c_mesa.obtener_codigo();
+        }
         c_mesa.setNumero(Integer.parseInt(txt_numero.getText()));
-//        c_mesa.setEstado(Integer.parseInt(txt_estado.getText()));
-//        c_mesa.setNumerosillas(Integer.parseInt(txt_sillas.getText()));
+        c_mesa.setEstado(1);
+        c_mesa.setNumerosillas(Integer.parseInt(txt_num_sillas.getValue().toString()));
+
     }
 
     /**
@@ -47,10 +61,12 @@ public class frm_reg_mesa extends javax.swing.JInternalFrame {
         btn_reg = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btn_cer = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        txt_num_sillas = new javax.swing.JSpinner();
 
         setTitle("Registro Mesa");
 
-        jLabel2.setText("Numero");
+        jLabel2.setText("Num. de Mesa");
 
         txt_numero.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -62,7 +78,6 @@ public class frm_reg_mesa extends javax.swing.JInternalFrame {
 
         btn_reg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/add.png"))); // NOI18N
         btn_reg.setText("Registrar");
-        btn_reg.setEnabled(false);
         btn_reg.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_reg.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btn_reg.addActionListener(new java.awt.event.ActionListener() {
@@ -90,39 +105,59 @@ public class frm_reg_mesa extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btn_cer);
 
+        jLabel3.setText("Num. de Sillas");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(txt_numero, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txt_numero, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txt_num_sillas, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_numero, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txt_num_sillas, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(4, 4, 4)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regActionPerformed
-        btn_reg.setEnabled(false);
+        btn_reg.setEnabled(true);
         llenar();
-        c_mesa.obtener_codigo();
-        c_mesa.insertar();
+        if (accion.equals("registrar")) {
+            c_mesa.insertar();
+        }
+         if (accion.equals("modificar")) {
+            c_mesa.modificar();
+        }
+        frm_ver_mesas frm_ver_mesas = new frm_ver_mesas();
+        c_varios.llamar_ventana(frm_ver_mesas);
         this.dispose();
-  
+
     }//GEN-LAST:event_btn_regActionPerformed
 
     private void btn_regKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_regKeyPressed
@@ -130,7 +165,10 @@ public class frm_reg_mesa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_regKeyPressed
 
     private void btn_cerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerActionPerformed
+        frm_ver_mesas frm_ver_mesas = new frm_ver_mesas();
+        c_varios.llamar_ventana(frm_ver_mesas);
         this.dispose();
+
     }//GEN-LAST:event_btn_cerActionPerformed
 
     private void txt_numeroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_numeroKeyPressed
@@ -147,8 +185,10 @@ public class frm_reg_mesa extends javax.swing.JInternalFrame {
     private javax.swing.JButton btn_cer;
     public static javax.swing.JButton btn_reg;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
+    private javax.swing.JSpinner txt_num_sillas;
     private javax.swing.JTextField txt_numero;
     // End of variables declaration//GEN-END:variables
 }

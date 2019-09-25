@@ -24,9 +24,12 @@ public class frm_ver_platos extends javax.swing.JInternalFrame {
      */
     public frm_ver_platos() {
         initComponents();
-        sql = "select idplatos, idclas_platos, descripcion, precio, cantidad "
-                + "from platos "
-                + " order by idplatos asc";
+        sql="SELECT p.idplatos,p.descripcion, p.precio, cp.tipo FROM platos p INNER JOIN clas_platos cp"
+                + " WHERE p.idclas_platos = cp.idclas_platos "
+                + "order by idplatos asc";
+//        sql = "select idplatos, idclas_platos.tipo, descripcion, precio "//, cantidad "
+//                + "from platos "
+//                + " order by idplatos asc";
         c_plato.ver_platos(tbl_plato, sql);
     }
 
@@ -227,7 +230,7 @@ public class frm_ver_platos extends javax.swing.JInternalFrame {
 
     private void btn_agreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agreActionPerformed
         // TODO add your handling code here:
-        frm_reg_platos.accion = "grabar";
+        frm_reg_platos.accion = "registrar";
         frm_reg_platos frm_platos = new frm_reg_platos();
         c_varios.llamar_ventana(frm_platos);
         this.dispose();

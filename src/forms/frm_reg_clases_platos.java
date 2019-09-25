@@ -88,7 +88,7 @@ public class frm_reg_clases_platos extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btn_reg);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/arrow_redo.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/application_edit.png"))); // NOI18N
         jButton1.setText("Modificar");
         jButton1.setEnabled(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

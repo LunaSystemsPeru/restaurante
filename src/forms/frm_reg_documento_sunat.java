@@ -98,7 +98,7 @@ public class frm_reg_documento_sunat extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btn_reg);
 
-        btn_mod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/arrow_redo.png"))); // NOI18N
+        btn_mod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/application_edit.png"))); // NOI18N
         btn_mod.setText("Modificar");
         btn_mod.setEnabled(false);
         btn_mod.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

@@ -181,7 +181,7 @@ public class frm_reg_proveedor extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btn_reg);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/arrow_redo.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/application_edit.png"))); // NOI18N
         jButton5.setText("Modificar");
         jButton5.setEnabled(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

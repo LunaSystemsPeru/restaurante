@@ -119,7 +119,7 @@ public class frm_reg_productos extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btn_reg);
 
-        btn_modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/arrow_redo.png"))); // NOI18N
+        btn_modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/application_edit.png"))); // NOI18N
         btn_modificar.setText("Modifcar");
         btn_modificar.setEnabled(false);
         btn_modificar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

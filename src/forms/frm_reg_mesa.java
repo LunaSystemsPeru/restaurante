@@ -58,7 +58,7 @@ public class frm_reg_mesa extends javax.swing.JInternalFrame {
             }
         });
 
-        jToolBar1.setRollover(true);
+        jToolBar1.setFloatable(false);
 
         btn_reg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/add.png"))); // NOI18N
         btn_reg.setText("Registrar");

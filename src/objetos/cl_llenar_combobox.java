@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class cl_llenar_combobox {
     cl_conectar c_conectar = new cl_conectar();
 
-    public void llenar_combobox(JComboBox combobox, String query) {
+    private void llenar_combobox(JComboBox combobox, String query) {
         combobox.removeAllItems();
         try {
             Statement st = c_conectar.conexion();
@@ -35,5 +35,19 @@ public class cl_llenar_combobox {
             System.out.println(ex);
             JOptionPane.showMessageDialog(null, ex);
         }
+    }
+    
+    public void verTodosDocumentosSunat (JComboBox combobox) {
+        String query = "select id_comprobante as id, nombre as descripcion "
+                + "from documento_sunat "
+                + "order by nombre asc ";
+        llenar_combobox(combobox, query);
+    }
+    
+    public void verClasificacionPlatos (JComboBox combobox) { 
+        String query = "select idclas_platos as id, tipo as descripcion "
+                + "from clas_platos "
+                + "order by tipo asc";
+        llenar_combobox(combobox, query);
     }
 }

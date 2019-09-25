@@ -29,8 +29,8 @@ public class frm_reg_empleado extends javax.swing.JInternalFrame {
             txt_nombre.setText(c_empleados.getNombres());
             txt_apellido.setText(c_empleados.getApellidos());
             txt_usuario.setText(c_empleados.getUsuario());
-            txt_contraseña.setText(c_empleados.getContraseña());
-            txt_nur_documento.setText(c_empleados.getNur_documento());
+            txt_contraseña.setText(c_empleados.getPassword());
+            txt_nur_documento.setText(c_empleados.getNro_documento());
         }
 
     }
@@ -42,8 +42,8 @@ public class frm_reg_empleado extends javax.swing.JInternalFrame {
         c_empleados.setNombres(txt_nombre.getText());
         c_empleados.setApellidos(txt_apellido.getText());
         c_empleados.setUsuario(txt_usuario.getText());
-        c_empleados.setContraseña(txt_contraseña.getText());
-        c_empleados.setNur_documento(txt_nur_documento.getText());
+        c_empleados.setPassword(txt_contraseña.getText());
+        c_empleados.setNro_documento(txt_nur_documento.getText());
     }
 
     @SuppressWarnings("unchecked")

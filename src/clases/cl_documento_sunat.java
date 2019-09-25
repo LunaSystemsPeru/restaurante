@@ -2,23 +2,26 @@ package clases;
 
 import java.sql.*;
 import clases.cl_conectar;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowSorter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import objetos.o_combobox;
 
 public class cl_documento_sunat {
 
     cl_conectar c_conectar = new cl_conectar();
-    private Connection con;
-    private Statement stmt;
-    private ResultSet rs;
+
     private int id_documento;
     private String nombre;
     private String cod_sunat;
     private String abreviatura;
+
+    private Statement stmt;
+    private ResultSet rs;
 
     /**
      * @return the id_documento
@@ -187,5 +190,4 @@ public class cl_documento_sunat {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-
 }

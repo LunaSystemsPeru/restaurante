@@ -32,10 +32,7 @@ public class frm_reg_platos extends javax.swing.JInternalFrame {
       
         txt_nombre.requestFocus();
 
-        String query = "select idclas_platos as id, tipo as descripcion "
-                + "from clas_platos "
-                + "order by tipo asc";
-        c_combo.llenar_combobox(cbox_claseplatos, query);
+        c_combo.verClasificacionPlatos(cbox_claseplatos);
     }
 
     private void llenar() {

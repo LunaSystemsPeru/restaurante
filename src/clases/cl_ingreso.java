@@ -25,7 +25,6 @@ public class cl_ingreso {
     cl_varios c_varios = new cl_varios();
 
     private int id_ingreso;
-    private int periodo;
     private String fecha;
     private int id_documento;
     private String serie;
@@ -43,14 +42,6 @@ public class cl_ingreso {
 
     public void setId_ingreso(int id_ingreso) {
         this.id_ingreso = id_ingreso;
-    }
-
-    public int getPeriodo() {
-        return periodo;
-    }
-
-    public void setPeriodo(int periodo) {
-        this.periodo = periodo;
     }
 
     public String getFecha() {
@@ -121,7 +112,6 @@ public class cl_ingreso {
             while (rs.next()) {
                 existe = true;
                 id_ingreso = rs.getInt("id_ingreso");
-                periodo = rs.getInt("periodo");
             }
 
             c_conectar.cerrar(rs);
@@ -134,17 +124,14 @@ public class cl_ingreso {
     }
 
     public int obtener_codigo() {
-        int resultado = 0;
-
         try {
             Statement st = c_conectar.conexion();
             String query = "select ifnull(max(id_ingreso) + 1, 1) as codigo "
-                    + "from ingresos "
-                    + "where periodo = '" + periodo + "' ";
+                    + "from ingresos ";
             ResultSet rs = c_conectar.consulta(st, query);
 
             while (rs.next()) {
-                resultado = rs.getInt("codigo");
+                id_ingreso = rs.getInt("codigo");
             }
 
             c_conectar.cerrar(rs);
@@ -153,7 +140,7 @@ public class cl_ingreso {
             JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
         }
 
-        return resultado;
+        return id_ingreso;
     }
 
     public void ver_ingresos(JTable tabla, String query) {
@@ -167,7 +154,7 @@ public class cl_ingreso {
             Statement st = c_conectar.conexion();
             ResultSet rs = c_conectar.consulta(st, query);
 
-            RowSorter<TableModel> sorter = new TableRowSorter<TableModel>(mostrar);
+            RowSorter<TableModel> sorter = new TableRowSorter<>(mostrar);
             tabla.setRowSorter(sorter);
 
             mostrar.addColumn("Codigo");
@@ -209,7 +196,7 @@ public class cl_ingreso {
         boolean grabado = false;
         Statement st = c_conectar.conexion();
         String query = "insert into ingresos "
-                + "Values ('" + id_ingreso + "', '" + periodo + "', '" + fecha + "', '" + id_documento + "', '" + serie + "', "
+                + "Values ('" + id_ingreso + "', '" + fecha + "', '" + id_documento + "', '" + serie + "', "
                 + "'" + numero + "', '" + id_proveedor + "', '" + total + "', '" + id_usuario + "')";
         int resultado = c_conectar.actualiza(st, query);
 

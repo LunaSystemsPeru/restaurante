@@ -24,6 +24,7 @@ public class cl_clas_platos {
 
     private int id;
     private String tipo;
+    
     private Statement st;
     private ResultSet rs;
 

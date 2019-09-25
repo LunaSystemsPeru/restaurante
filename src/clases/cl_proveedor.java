@@ -263,6 +263,25 @@ public class cl_proveedor {
 //        c_conectar.cerrar(stmt);
         return si;
     }
+    
+    public boolean buscarRUC() {
+        boolean si = false;
+        try {
+            stmt = c_conectar.conexion();
+            String query = "SELECT * FROM proveedor where num_documento='" + num_documento + "'";
+            System.out.println(query);
+            rs = c_conectar.consulta(stmt, query);
+            while (rs.next()) {
+                id_proveedor=rs.getInt("idproveedor");
+                si = true;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
+        }
+//        c_conectar.cerrar(rs);
+//        c_conectar.cerrar(stmt);
+        return si;
+    }
 
     public void ver_proveedores(JTable tabla, String query) {
         try {

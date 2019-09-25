@@ -4,7 +4,9 @@ package vistas;
 import clases.cl_proveedor;
 import clases.cl_varios;
 import forms.frm_reg_proveedor;
+import java.awt.Frame;
 import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 
 public class frm_ver_proveedor extends javax.swing.JInternalFrame {
 cl_proveedor c_proveedor=new cl_proveedor();
@@ -12,9 +14,12 @@ cl_varios c_varios=new cl_varios();
 int fila;
     public frm_ver_proveedor() {
         initComponents();
+        llenar_tabla();      
+        
+    }
+    public void llenar_tabla(){
         String query="select * from proveedor ORDER by num_documento DESC";
         c_proveedor.ver_proveedores(t_proveedor, query);
-        
     }
    
     @SuppressWarnings("unchecked")
@@ -222,11 +227,14 @@ int fila;
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
        
        if(fila>-1){
-           frm_reg_proveedor.accion="modificar";
+           Frame f = JOptionPane.getRootFrame();
+           frm_reg_proveedor.accion=false;
            frm_reg_proveedor.id_proveedor=Integer.parseInt(t_proveedor.getValueAt(fila,0).toString());
-            frm_reg_proveedor frm_proveedor=new frm_reg_proveedor();
-        c_varios.llamar_ventana_completa(frm_proveedor);
-        this.dispose(); 
+           frm_reg_proveedor frm_proveedor=new frm_reg_proveedor(f, true,this);
+        //c_varios.llamar_ventana_completa(frm_proveedor);
+       
+        frm_proveedor.setVisible(true);
+        //this.dispose();
        } 
     }//GEN-LAST:event_btn_modificarActionPerformed
 
@@ -248,10 +256,20 @@ int fila;
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btn_regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regActionPerformed
-        frm_reg_proveedor.accion="grabar";
-        frm_reg_proveedor frm_proveedor=new frm_reg_proveedor();
-        c_varios.llamar_ventana_completa(frm_proveedor);
-        this.dispose();
+        //frm_reg_proveedor.accion="grabar";
+        //frm_reg_proveedor frm_proveedor=new frm_reg_proveedor(this, true);
+        //c_varios.llamar_ventana_completa(frm_proveedor);
+       // this.dispose();
+       
+        Frame f = JOptionPane.getRootFrame();
+        frm_reg_proveedor.accion = true;
+        frm_reg_proveedor dialog = new frm_reg_proveedor(f, true,this);
+        //frm_reg_proveedor.txt_ndoc.setText(c_proveedor.getRuc());
+        
+        //frm_reg_proveedor.origen = "reg_ingreso";
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+       
     }//GEN-LAST:event_btn_regActionPerformed
 
     private void btn_regKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_regKeyPressed

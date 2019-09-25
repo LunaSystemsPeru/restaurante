@@ -131,43 +131,31 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_nombre">
-      <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
       <Events>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_nombreKeyTyped"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_nombreKeyPressed"/>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_nombreKeyReleased"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_nombreKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_apellido">
-      <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
       <Events>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_apellidoKeyTyped"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_apellidoKeyPressed"/>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_apellidoKeyReleased"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_apellidoKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_usuario">
-      <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
       <Events>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_usuarioKeyTyped"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_usuarioKeyPressed"/>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_usuarioKeyReleased"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_usuarioKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_contrase&#xf1;a">
-      <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
       <Events>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_contrase&#xf1;aKeyTyped"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_contrase&#xf1;aKeyPressed"/>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_contrase&#xf1;aKeyReleased"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_contrase&#xf1;aKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel8">
@@ -177,8 +165,8 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txt_nur_documento">
       <Events>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_nur_documentoKeyTyped"/>
         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_nur_documentoKeyPressed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txt_nur_documentoKeyTyped"/>
       </Events>
     </Component>
     <Container class="javax.swing.JToolBar" name="jToolBar1">
@@ -188,19 +176,18 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btn_reg">
+        <Component class="javax.swing.JButton" name="btn_reg_edi">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/recursos/add.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Registrar"/>
-            <Property name="enabled" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="0"/>
             <Property name="verticalTextPosition" type="int" value="3"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_regActionPerformed"/>
-            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btn_regKeyPressed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_reg_ediActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btn_reg_ediKeyPressed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -227,20 +214,20 @@
     <Component class="javax.swing.JCheckBox" name="chb_estado">
       <Properties>
         <Property name="text" type="java.lang.String" value="Activo"/>
-        <Property name="enabled" type="boolean" value="false"/>
+        <Property name="opaque" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="cbx_cargo">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="5">
+            <StringItem index="0" value="Seleccionar"/>
+            <StringItem index="1" value="Administrador"/>
+            <StringItem index="2" value="Mozo"/>
+            <StringItem index="3" value="Cajero"/>
+            <StringItem index="4" value=""/>
           </StringArray>
         </Property>
-        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

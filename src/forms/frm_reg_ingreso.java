@@ -276,12 +276,17 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
 
         txt_ruc_proveedor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_ruc_proveedor.setEnabled(false);
-        txt_ruc_proveedor.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_ruc_proveedorKeyTyped(evt);
+        txt_ruc_proveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_ruc_proveedorActionPerformed(evt);
             }
+        });
+        txt_ruc_proveedor.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_ruc_proveedorKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_ruc_proveedorKeyTyped(evt);
             }
         });
 
@@ -693,14 +698,14 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
                     txt_buscar_productos.setEnabled(true);
                     txt_buscar_productos.requestFocus();
                 } else {
-                /*    Frame f = JOptionPane.getRootFrame();
+                    /*Frame f = JOptionPane.getRootFrame();
                     frm_reg_proveedor dialog = new frm_reg_proveedor(f, true);
                     frm_reg_proveedor.txt_ndoc.setText(c_proveedor.getRuc());
                     frm_reg_proveedor.accion = "registrar";
                     frm_reg_proveedor.origen = "reg_ingreso";
                     dialog.setLocationRelativeTo(null);
-                    dialog.setVisible(true);
-                */
+                    dialog.setVisible(true);*/
+                
                 }
 
             }
@@ -871,6 +876,10 @@ public class frm_reg_ingreso extends javax.swing.JInternalFrame {
             jButton7.setEnabled(true);
         }
     }//GEN-LAST:event_t_detalleMouseClicked
+
+    private void txt_ruc_proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_ruc_proveedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_ruc_proveedorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

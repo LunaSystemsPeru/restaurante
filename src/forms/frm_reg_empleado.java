@@ -17,13 +17,18 @@ import java.awt.event.KeyEvent;
 public class frm_reg_empleado extends javax.swing.JInternalFrame {
 
     public static int id_empleado;
-    public static String accion;
+    
+    //accion -> agregar= true, Modificar = false
+    public static boolean accion;
     cl_empleado c_empleados = new cl_empleado();
     cl_varios c_varios = new cl_varios();
 
     public frm_reg_empleado() {
         initComponents();
-        if (accion.equals("modificar")) {
+        if (!accion) {
+            btn_reg_edi.setText("Modificar");
+            btn_reg_edi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/application_edit.png")));
+            
             c_empleados.setId_empleados(id_empleado);
             c_empleados.obtener_datos();
             txt_nombre.setText(c_empleados.getNombres());
@@ -31,12 +36,16 @@ public class frm_reg_empleado extends javax.swing.JInternalFrame {
             txt_usuario.setText(c_empleados.getUsuario());
             txt_contraseña.setText(c_empleados.getPassword());
             txt_nur_documento.setText(c_empleados.getNro_documento());
+            chb_estado.setSelected(c_empleados.getEstado()==1);
+            cbx_cargo.setSelectedIndex(c_empleados.getCargo()+1); 
+        }else{
+            c_empleados.setId_empleados(c_empleados.obtener_codigo());
         }
 
     }
 
     private void llenar() {
-        if (accion.equals("registrar")) {
+        if (accion) {
             c_empleados.obtener_codigo();
         }
         c_empleados.setNombres(txt_nombre.getText());
@@ -44,6 +53,8 @@ public class frm_reg_empleado extends javax.swing.JInternalFrame {
         c_empleados.setUsuario(txt_usuario.getText());
         c_empleados.setPassword(txt_contraseña.getText());
         c_empleados.setNro_documento(txt_nur_documento.getText());
+        c_empleados.setCargo(cbx_cargo.getSelectedIndex()-1);
+        c_empleados.setEstado((chb_estado.isSelected())?1:0); 
     }
 
     @SuppressWarnings("unchecked")
@@ -63,7 +74,7 @@ public class frm_reg_empleado extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         txt_nur_documento = new javax.swing.JTextField();
         jToolBar1 = new javax.swing.JToolBar();
-        btn_reg = new javax.swing.JButton();
+        btn_reg_edi = new javax.swing.JButton();
         btn_cer = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         chb_estado = new javax.swing.JCheckBox();
@@ -83,87 +94,82 @@ public class frm_reg_empleado extends javax.swing.JInternalFrame {
 
         jLabel7.setText("Cargo");
 
-        txt_nombre.setEnabled(false);
         txt_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_nombreKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_nombreKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_nombreKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nombreKeyTyped(evt);
+            }
         });
 
-        txt_apellido.setEnabled(false);
         txt_apellido.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_apellidoKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_apellidoKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_apellidoKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_apellidoKeyTyped(evt);
+            }
         });
 
-        txt_usuario.setEnabled(false);
         txt_usuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_usuarioKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_usuarioKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_usuarioKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_usuarioKeyTyped(evt);
+            }
         });
 
-        txt_contraseña.setEnabled(false);
         txt_contraseña.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_contraseñaKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_contraseñaKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_contraseñaKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_contraseñaKeyTyped(evt);
+            }
         });
 
         jLabel8.setText("DNI:");
 
         txt_nur_documento.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_nur_documentoKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_nur_documentoKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_nur_documentoKeyTyped(evt);
             }
         });
 
         jToolBar1.setFloatable(false);
 
-        btn_reg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/add.png"))); // NOI18N
-        btn_reg.setText("Registrar");
-        btn_reg.setEnabled(false);
-        btn_reg.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btn_reg.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btn_reg.addActionListener(new java.awt.event.ActionListener() {
+        btn_reg_edi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/add.png"))); // NOI18N
+        btn_reg_edi.setText("Registrar");
+        btn_reg_edi.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_reg_edi.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_reg_edi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_regActionPerformed(evt);
+                btn_reg_ediActionPerformed(evt);
             }
         });
-        btn_reg.addKeyListener(new java.awt.event.KeyAdapter() {
+        btn_reg_edi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                btn_regKeyPressed(evt);
+                btn_reg_ediKeyPressed(evt);
             }
         });
-        jToolBar1.add(btn_reg);
+        jToolBar1.add(btn_reg_edi);
 
         btn_cer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/cancel.png"))); // NOI18N
         btn_cer.setText("Cerrar");
@@ -178,10 +184,9 @@ public class frm_reg_empleado extends javax.swing.JInternalFrame {
         jToolBar1.add(btn_cer);
 
         chb_estado.setText("Activo");
-        chb_estado.setEnabled(false);
+        chb_estado.setOpaque(false);
 
-        cbx_cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cbx_cargo.setEnabled(false);
+        cbx_cargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Administrador", "Mozo", "Cajero", "" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -252,21 +257,21 @@ public class frm_reg_empleado extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regActionPerformed
-        btn_reg.setEnabled(false);
+    private void btn_reg_ediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reg_ediActionPerformed
+        btn_reg_edi.setEnabled(false);
         llenar();
         c_empleados.insertar();
         frm_ver_empleados frm_empleado = new frm_ver_empleados();
         c_varios.llamar_ventana_completa(frm_empleado);
         this.dispose();
 
-    }//GEN-LAST:event_btn_regActionPerformed
+    }//GEN-LAST:event_btn_reg_ediActionPerformed
 
-    private void btn_regKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_regKeyPressed
+    private void btn_reg_ediKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_reg_ediKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             llenar();
         }
-    }//GEN-LAST:event_btn_regKeyPressed
+    }//GEN-LAST:event_btn_reg_ediKeyPressed
 
     private void btn_cerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerActionPerformed
         this.dispose();
@@ -381,7 +386,7 @@ public class frm_reg_empleado extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cer;
-    public static javax.swing.JButton btn_reg;
+    public static javax.swing.JButton btn_reg_edi;
     private javax.swing.JComboBox<String> cbx_cargo;
     private javax.swing.JCheckBox chb_estado;
     private javax.swing.JLabel jLabel2;

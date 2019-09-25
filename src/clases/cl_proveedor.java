@@ -186,7 +186,7 @@ public class cl_proveedor {
         boolean grabar = false;
         try {
             stmt = c_conectar.conexion();
-            String query = "INSERT INTO proveedor VALUES('" + id_proveedor + "','" + num_documento + "','" + razon_social + "','" + telefono + "','" + celular + "','" + email + "','" + direccion + "','" + condicion + "','" + estado + "','" + 12.2 + "','" + 12.5 + "')";
+            String query = "INSERT INTO proveedor VALUES('" + id_proveedor + "','" + num_documento + "','" + razon_social + "','" + telefono + "','" + celular + "','" + email + "','" + direccion + "','" + condicion + "','" + estado + "')";
             int respuesta = c_conectar.actualiza(stmt, query);
             if (respuesta > -1) {
                 grabar = true;
@@ -200,7 +200,7 @@ public class cl_proveedor {
         boolean modifica = false;
         try {
             stmt = c_conectar.conexion();
-            String query = "UPDATE proveedor SET num_documento='" + num_documento + "',razon_social='" + razon_social + "',telefono='" + telefono + "',celular='" + celular + "',email='" + email + "',direccion='" + direccion + "',condicion='" + condicion + "',estado='" + estado + "',tcompra='" + 12 + "',tpagado='" + 12 + "' WHERE idproveedor='" + id_proveedor + "'";
+            String query = "UPDATE proveedor SET num_documento='" + num_documento + "',razon_social='" + razon_social + "',telefono='" + telefono + "',celular='" + celular + "',email='" + email + "',direccion='" + direccion + "',condicion='" + condicion + "',estado='" + estado + "' WHERE idproveedor='" + id_proveedor + "'";
             int respuesta = c_conectar.actualiza(stmt, query);
             if (respuesta > -1) {
                 modifica = true;
@@ -300,20 +300,28 @@ public class cl_proveedor {
             mostrar.addColumn("codigo");
             mostrar.addColumn("RUC");
             mostrar.addColumn("Razon Social");
+            mostrar.addColumn("Telefono");
+            mostrar.addColumn("Celular");
+            mostrar.addColumn("Email");
+             
+            /*
             mostrar.addColumn("S/ Compras");
             mostrar.addColumn("S/ Deudas");
-            mostrar.addColumn("Estado");
+            mostrar.addColumn("Estado");*/
 
             while (rs.next()) {
-                double compras = rs.getDouble("tcompra");
+                /*double compras = rs.getDouble("tcompra");
                 double pagado = rs.getDouble("tpagado");
-                double deuda = compras - pagado;
+                double deuda = compras - pagado;*/
 
                 Object fila[] = new Object[6];
                 fila[0] = rs.getInt("idproveedor");
                 fila[1] = rs.getString("num_documento");
                 fila[2] = rs.getString("razon_social").trim().toUpperCase();
-                fila[3] = c_varios.formato_totales(compras);
+                fila[3] = rs.getInt("telefono");
+                fila[4] = rs.getInt("celular");
+                fila[5] = rs.getString("email").trim();
+               /* fila[3] = c_varios.formato_totales(compras);
                 fila[4] = c_varios.formato_totales(deuda);
                 if (compras > 0 & deuda == 0) {
                     fila[5] = "-";
@@ -327,7 +335,7 @@ public class cl_proveedor {
                 }
                 if (compras == 0) {
                     fila[5] = "INACTIVO";
-                }
+                }*/
                 mostrar.addRow(fila);
             }
 
@@ -336,10 +344,10 @@ public class cl_proveedor {
             tabla.setModel(mostrar);
             tabla.getColumnModel().getColumn(0).setPreferredWidth(100);
             tabla.getColumnModel().getColumn(1).setPreferredWidth(100);
-            tabla.getColumnModel().getColumn(2).setPreferredWidth(500);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(400);
             tabla.getColumnModel().getColumn(3).setPreferredWidth(80);
             tabla.getColumnModel().getColumn(4).setPreferredWidth(80);
-            tabla.getColumnModel().getColumn(5).setPreferredWidth(100);
+            tabla.getColumnModel().getColumn(5).setPreferredWidth(200);
         } catch (SQLException ex) {
             System.out.println(ex);
             JOptionPane.showMessageDialog(null, ex);

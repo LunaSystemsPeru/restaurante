@@ -192,7 +192,7 @@ cl_empleado c_empleados=new cl_empleado();
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
       if(fila>-1){
           frm_reg_empleado.id_empleado=Integer.parseInt(t_empleados.getValueAt(fila,0).toString());
-          frm_reg_empleado.accion="modificar";
+          frm_reg_empleado.accion=false;
           frm_reg_empleado frm_empleados=new frm_reg_empleado();
         c_varios.llamar_ventana_completa(frm_empleados);
          this.dispose();
@@ -212,7 +212,7 @@ cl_empleado c_empleados=new cl_empleado();
 
     private void btn_regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regActionPerformed
         // TODO add your handling code here:
-        frm_reg_empleado.accion = "grabar";
+        frm_reg_empleado.accion = true;
         frm_reg_empleado frm_empleados = new frm_reg_empleado();
         c_varios.llamar_ventana(frm_empleados);
         this.dispose();

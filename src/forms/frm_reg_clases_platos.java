@@ -29,7 +29,7 @@ public class frm_reg_clases_platos extends javax.swing.JInternalFrame {
         initComponents();
         txt_codigo.setEditable(false);
         txt_tipo.requestFocus();
-        txt_codigo.setText(String.valueOf(c_clasep.obtener_codigo()));
+        txt_codigo.setText(String.valueOf(c_clasep.generarCodigo()));
     }
 
     private void llenar() {
@@ -155,7 +155,7 @@ public class frm_reg_clases_platos extends javax.swing.JInternalFrame {
 
     private void btn_regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regActionPerformed
         llenar();
-        c_clasep.obtener_codigo();
+        c_clasep.generarCodigo();
         c_clasep.insertar();
         btn_cerrar.doClick();
 

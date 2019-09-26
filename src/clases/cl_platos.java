@@ -114,12 +114,10 @@ public class cl_platos {
                 int id = rsr.getInt("idplatos");
                 String descripcion = rsr.getString("descripcion");
                 double precio = rsr.getDouble("precio");
-                int cantidad = rsr.getInt("cantidad");
                 ArrayList fila_plato = new ArrayList();
                 fila_plato.add(id);
                 fila_plato.add(descripcion);
                 fila_plato.add(precio);
-                fila_plato.add(cantidad);
                 plato.add(fila_plato);
             }
         } catch (SQLException ex) {
@@ -200,7 +198,7 @@ public class cl_platos {
                 idplatos = rs.getInt("idplatos");
                 descripcion = rs.getString("descripcion");
                 precio = rs.getString("precio");
-                cantidad = rs.getString("cantidad");
+                //cantidad = rs.getString("cantidad");
                 idclas_platos = rs.getInt("idclas_platos");
                 existe = true;
 
@@ -228,7 +226,6 @@ public class cl_platos {
     public boolean insertar() {
         boolean grabar = false;
         st = c_conectar.conexion();
-//        String squly = "insert into platos values('" + idplatos + "','" + descripcion + "','" + precio + "','" + cantidad + "','" + idclas_platos + "')";
         String squly = "insert into platos values('" + idplatos + "','" + descripcion + "','" + precio + "','" + idclas_platos + "')";
         int respuesta = c_conectar.actualiza(st, squly);
         if (respuesta > -1) {

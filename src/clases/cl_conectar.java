@@ -24,6 +24,11 @@ public class cl_conectar implements i_datos_bd {
     // String server = "jdbc:mysql://lunasystemsperu.com:3306/" + bd;
     String server = "jdbc:mysql://" + servidor + ":3306/" + bd;
 
+//    String bd = "restaurante";
+//    String user = "root_lsp";
+//    String password = "root/*123";
+//    String servidor = "192.168.1.6";
+    
     /**
      * Método para realizar consultas de actualización, creación o eliminación.
      *

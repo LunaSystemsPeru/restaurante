@@ -375,7 +375,9 @@ public class frm_menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Reg_VentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Reg_VentaActionPerformed
-        // TODO add your handling code here:
+
+        frm_reg_pedido formulario = new frm_reg_pedido();
+        c_varios.llamar_ventana_completa(formulario);
     }//GEN-LAST:event_Reg_VentaActionPerformed
 
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed

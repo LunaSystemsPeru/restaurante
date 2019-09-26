@@ -10,6 +10,7 @@ import clases.cl_varios;
 import java.awt.event.KeyEvent;
 import objetos.cl_llenar_combobox;
 import objetos.o_combobox;
+import vistas.*;
 
 /**
  *
@@ -29,10 +30,20 @@ public class frm_reg_platos extends javax.swing.JInternalFrame {
      */
     public frm_reg_platos() {
         initComponents();
-      
-        txt_nombre.requestFocus();
 
+        txt_nombre.requestFocus();
         c_combo.verClasificacionPlatos(cbox_claseplatos);
+        
+        if (accion.equals("modificar")) {
+            c_plato.setIdplatos(id_platos);
+            c_plato.obtener_datos();
+            cbox_claseplatos.setSelectedIndex(c_plato.getIdclas_platos());
+            txt_nombre.setText(c_plato.getNombre());
+            txt_precio.setText(c_plato.getPrecio());
+            
+            btn_modificar.setEnabled(true);
+            btn_reg.setEnabled(false);
+        }
     }
 
     private void llenar() {
@@ -96,7 +107,6 @@ public class frm_reg_platos extends javax.swing.JInternalFrame {
 
         btn_reg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/add.png"))); // NOI18N
         btn_reg.setText("Registrar");
-        btn_reg.setEnabled(false);
         btn_reg.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btn_reg.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btn_reg.addActionListener(new java.awt.event.ActionListener() {
@@ -181,10 +191,11 @@ public class frm_reg_platos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regActionPerformed
-
-        llenar();
         c_plato.obtener_codigo();
+        llenar();
         c_plato.insertar();
+        frm_ver_platos formulario = new frm_ver_platos();
+        c_varios.llamar_ventana(formulario);
         this.dispose();
     }//GEN-LAST:event_btn_regActionPerformed
 
@@ -193,6 +204,11 @@ public class frm_reg_platos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btn_regKeyPressed
 
     private void btn_cerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerActionPerformed
+
+        frm_ver_platos formulario = new frm_ver_platos();
+        btn_reg.setEnabled(true);
+        btn_modificar.setEnabled(false);
+        c_varios.llamar_ventana(formulario);
         this.dispose();
     }//GEN-LAST:event_btn_cerActionPerformed
 
@@ -221,7 +237,12 @@ public class frm_reg_platos extends javax.swing.JInternalFrame {
 
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
         llenar();
+        c_plato.setIdplatos(id_platos);
         c_plato.modificar();
+        btn_reg.setEnabled(true);
+        btn_modificar.setEnabled(false);
+        frm_ver_platos formulario = new frm_ver_platos();
+        c_varios.llamar_ventana(formulario);
         this.dispose();
     }//GEN-LAST:event_btn_modificarActionPerformed
 
@@ -229,7 +250,7 @@ public class frm_reg_platos extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cer;
     private javax.swing.JButton btn_modificar;
-    public static javax.swing.JButton btn_reg;
+    private javax.swing.JButton btn_reg;
     private javax.swing.JComboBox<String> cbox_claseplatos;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

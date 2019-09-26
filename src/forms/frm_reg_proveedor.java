@@ -3,20 +3,31 @@ package forms;
 
 import clases.cl_proveedor;
 import clases.cl_varios;
+import java.awt.Frame;
 import java.awt.event.KeyEvent;
+import javax.swing.JInternalFrame;
 
 import vistas.frm_ver_proveedor;
 
-public class frm_reg_proveedor extends javax.swing.JInternalFrame {
+public class frm_reg_proveedor extends javax.swing.JDialog {
 
     public static int id_proveedor;
-    public static String accion;
+
+    //accion -> agregar= true, Modificar = false
+    public static boolean accion;
     cl_proveedor c_proveedores = new cl_proveedor();
     cl_varios c_varios = new cl_varios();
+    JInternalFrame jif;
 
-    public frm_reg_proveedor() {
+    public frm_reg_proveedor(Frame owner, boolean modal, JInternalFrame jif) {
+        super(owner, modal);
         initComponents();
-        if (accion.equals("modificar")) {
+        this.jif = jif;
+        if (!accion) {
+            btn_reg_edi.setText("Modificar");
+            btn_reg_edi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/application_edit.png")));
+            btn_reg_edi.setEnabled(true);
+            txt_nudocumento.setEditable(false);
             c_proveedores.setId_proveedor(id_proveedor);
             c_proveedores.obtener_datos();
 //            txt_codigo.setText(String.valueOf(c_proveedores.getId_proveedor()));
@@ -26,17 +37,28 @@ public class frm_reg_proveedor extends javax.swing.JInternalFrame {
             txt_celular.setText(String.valueOf(c_proveedores.getCelular()));
             txt_email.setText(c_proveedores.getEmail());
             txt_diereccion.setText(c_proveedores.getDireccion());
-            txt_condicion.setText(c_proveedores.getCondicion());
-            txt_estado.setText(c_proveedores.getEstado());
+            
+            combo_condicion.setSelectedItem(c_proveedores.getCondicion());
+            combo_estado.setSelectedItem(c_proveedores.getEstado());
+            
+            txt_razon_social.setEnabled(true);
+            txt_telefono.setEnabled(true);
+            txt_celular.setEnabled(true);
+            txt_email.setEnabled(true);
+            txt_diereccion.setEnabled(true);
+            combo_condicion.setEnabled(true);
+            combo_estado.setEnabled(true);
+
         }
+        this.setLocationRelativeTo(null);
     }
 
     public void llenar() {
-        if (accion.equals("modificar")) {
+        if (!accion) {
 //            c_proveedores.setId_proveedor(Integer.parseInt(txt_codigo.getText()));
 
         }
-        if (accion.equals("grabar")) {
+        if (accion) {
             c_proveedores.setId_proveedor(c_proveedores.obtenr_codigo());
         }
         c_proveedores.setNum_documento(txt_nudocumento.getText());
@@ -45,8 +67,8 @@ public class frm_reg_proveedor extends javax.swing.JInternalFrame {
         c_proveedores.setCelular(Integer.parseInt(txt_celular.getText()));
         c_proveedores.setDireccion(txt_diereccion.getText());
         c_proveedores.setEmail(txt_email.getText());
-        c_proveedores.setEstado(txt_estado.getText());
-        c_proveedores.setCondicion(txt_condicion.getText());
+        c_proveedores.setEstado(combo_estado.getSelectedItem()+"");
+        c_proveedores.setCondicion(combo_condicion.getSelectedItem()+"");
 
     }
 
@@ -67,14 +89,13 @@ public class frm_reg_proveedor extends javax.swing.JInternalFrame {
         txt_celular = new javax.swing.JTextField();
         txt_email = new javax.swing.JTextField();
         txt_diereccion = new javax.swing.JTextField();
-        txt_estado = new javax.swing.JTextField();
-        txt_condicion = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
-        btn_reg = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btn_reg_edi = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btn_cer = new javax.swing.JButton();
+        combo_condicion = new javax.swing.JComboBox<>();
+        combo_estado = new javax.swing.JComboBox<>();
 
         setTitle("Registrar Proveedor");
 
@@ -136,62 +157,26 @@ public class frm_reg_proveedor extends javax.swing.JInternalFrame {
             }
         });
 
-        txt_estado.setEnabled(false);
-        txt_estado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_estadoActionPerformed(evt);
-            }
-        });
-        txt_estado.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_estadoKeyPressed(evt);
-            }
-        });
-
-        txt_condicion.setEnabled(false);
-        txt_condicion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_condicionActionPerformed(evt);
-            }
-        });
-        txt_condicion.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_condicionKeyPressed(evt);
-            }
-        });
-
         jLabel9.setText("Estado:");
 
         jToolBar1.setFloatable(false);
 
-        btn_reg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/add.png"))); // NOI18N
-        btn_reg.setText("Registrar");
-        btn_reg.setEnabled(false);
-        btn_reg.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btn_reg.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btn_reg.addActionListener(new java.awt.event.ActionListener() {
+        btn_reg_edi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/add.png"))); // NOI18N
+        btn_reg_edi.setText("Registrar");
+        btn_reg_edi.setEnabled(false);
+        btn_reg_edi.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_reg_edi.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_reg_edi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_regActionPerformed(evt);
+                btn_reg_ediActionPerformed(evt);
             }
         });
-        btn_reg.addKeyListener(new java.awt.event.KeyAdapter() {
+        btn_reg_edi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                btn_regKeyPressed(evt);
+                btn_reg_ediKeyPressed(evt);
             }
         });
-        jToolBar1.add(btn_reg);
-
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/application_edit.png"))); // NOI18N
-        jButton5.setText("Modificar");
-        jButton5.setEnabled(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        jToolBar1.add(jButton5);
+        jToolBar1.add(btn_reg_edi);
         jToolBar1.add(jSeparator1);
 
         btn_cer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/cancel.png"))); // NOI18N
@@ -205,6 +190,22 @@ public class frm_reg_proveedor extends javax.swing.JInternalFrame {
             }
         });
         jToolBar1.add(btn_cer);
+
+        combo_condicion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Habido", "No habido" }));
+        combo_condicion.setEnabled(false);
+        combo_condicion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_condicionActionPerformed(evt);
+            }
+        });
+
+        combo_estado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Activo", "Baja de oficio" }));
+        combo_estado.setEnabled(false);
+        combo_estado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_estadoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -224,18 +225,16 @@ public class frm_reg_proveedor extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_razon_social)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txt_estado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                .addComponent(txt_condicion, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(txt_nudocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txt_celular, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                                .addComponent(txt_telefono, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addGap(0, 147, Short.MAX_VALUE))
                     .addComponent(txt_email)
-                    .addComponent(txt_diereccion))
+                    .addComponent(txt_diereccion)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_nudocumento, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txt_celular, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(txt_telefono)
+                            .addComponent(combo_condicion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(combo_estado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 147, Short.MAX_VALUE)))
                 .addContainerGap())
             .addComponent(jToolBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -270,28 +269,37 @@ public class frm_reg_proveedor extends javax.swing.JInternalFrame {
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_condicion, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(combo_condicion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txt_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(combo_estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regActionPerformed
+    private void btn_reg_ediActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reg_ediActionPerformed
         llenar();
-        c_proveedores.insertar();
-        frm_ver_proveedor frm_proveedor = new frm_ver_proveedor();
-        c_varios.llamar_ventana_completa(frm_proveedor);
+
+        //frm_ver_proveedor frm_proveedor = new frm_ver_proveedor();
+        if (accion) {
+            c_proveedores.insertar();
+            //c_varios.llamar_ventana_completa(frm_proveedor);
+        } else {
+            llenar();
+            c_proveedores.modificar();
+            //c_varios.llamar_ventana_completa(frm_proveedor);
+
+        }
         this.dispose();
-    }//GEN-LAST:event_btn_regActionPerformed
+        ((frm_ver_proveedor) jif).llenar_tabla();
+    }//GEN-LAST:event_btn_reg_ediActionPerformed
 
-    private void btn_regKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_regKeyPressed
+    private void btn_reg_ediKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btn_reg_ediKeyPressed
 
-    }//GEN-LAST:event_btn_regKeyPressed
+    }//GEN-LAST:event_btn_reg_ediKeyPressed
 
     private void btn_cerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cerActionPerformed
         this.dispose();
@@ -354,51 +362,37 @@ public class frm_reg_proveedor extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (txt_diereccion.getText().length() > 1) {
-                txt_condicion.setEnabled(true);
-                txt_condicion.requestFocus();
+                combo_condicion.setEnabled(true);
+                //jComboBox1.requestFocus();
             }
         }
     }//GEN-LAST:event_txt_diereccionKeyPressed
 
-    private void txt_estadoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_estadoKeyPressed
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (txt_estado.getText().length() > 0) {
-            }
+    private void combo_condicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_condicionActionPerformed
+        if (combo_condicion.getSelectedIndex() > 0) {
+            
+            combo_estado.setEnabled(true);
+             btn_reg_edi.setEnabled(combo_estado.getSelectedIndex() > 0);
+        } else {
+            combo_estado.setEnabled(false);
+            btn_reg_edi.setEnabled(false);
         }
-    }//GEN-LAST:event_txt_estadoKeyPressed
+    }//GEN-LAST:event_combo_condicionActionPerformed
 
-    private void txt_condicionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_condicionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_condicionActionPerformed
-
-    private void txt_condicionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_condicionKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (txt_condicion.getText().length() > 0) {
-                txt_estado.setEnabled(true);
-                txt_estado.requestFocus();
-            }
+    private void combo_estadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_estadoActionPerformed
+        if (combo_estado.getSelectedIndex() > 0) {
+            btn_reg_edi.setEnabled(true);
+        } else {
+            btn_reg_edi.setEnabled(false);
         }
-    }//GEN-LAST:event_txt_condicionKeyPressed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        llenar();
-        c_proveedores.modificar();
-        frm_ver_proveedor frm_proveedor=new frm_ver_proveedor();
-        c_varios.llamar_ventana_completa(frm_proveedor);
-        this.dispose();
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void txt_estadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_estadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_estadoActionPerformed
+    }//GEN-LAST:event_combo_estadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cer;
-    public static javax.swing.JButton btn_reg;
-    private javax.swing.JButton jButton5;
+    public static javax.swing.JButton btn_reg_edi;
+    private javax.swing.JComboBox<String> combo_condicion;
+    private javax.swing.JComboBox<String> combo_estado;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -410,10 +404,8 @@ public class frm_reg_proveedor extends javax.swing.JInternalFrame {
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTextField txt_celular;
-    private javax.swing.JTextField txt_condicion;
     private javax.swing.JTextField txt_diereccion;
     private javax.swing.JTextField txt_email;
-    private javax.swing.JTextField txt_estado;
     private javax.swing.JTextField txt_nudocumento;
     private javax.swing.JTextField txt_razon_social;
     private javax.swing.JTextField txt_telefono;

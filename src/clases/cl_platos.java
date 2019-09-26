@@ -100,7 +100,7 @@ public class cl_platos {
     }
 
     public ArrayList obtener_platos() {
-        ArrayList<ArrayList> plato=new ArrayList<>();
+        ArrayList<ArrayList> plato = new ArrayList<>();
         ResultSet rsr;
         String query = "select * "
                 + "from platos "
@@ -108,14 +108,14 @@ public class cl_platos {
                 + "order by descripcion asc";
         Statement sts = c_conectar.conexion();
         rsr = c_conectar.consulta(sts, query);
-        
+
         try {
-            while(rsr.next()){
-                int id=rsr.getInt("idplatos");
-                String descripcion=rsr.getString("descripcion");
-                double precio=rsr.getDouble("precio");
-                int cantidad=rsr.getInt("cantidad");
-                ArrayList fila_plato=new ArrayList();
+            while (rsr.next()) {
+                int id = rsr.getInt("idplatos");
+                String descripcion = rsr.getString("descripcion");
+                double precio = rsr.getDouble("precio");
+                int cantidad = rsr.getInt("cantidad");
+                ArrayList fila_plato = new ArrayList();
                 fila_plato.add(id);
                 fila_plato.add(descripcion);
                 fila_plato.add(precio);
@@ -165,7 +165,7 @@ public class cl_platos {
             mostrar.addColumn("Codigo");
             mostrar.addColumn("nombre");
             mostrar.addColumn("precio");
-            mostrar.addColumn("cantidad");
+            mostrar.addColumn("Clasificacion");
 
             while (rs.next()) {
                 Object fila[] = new Object[4];
@@ -173,7 +173,7 @@ public class cl_platos {
                 fila[0] = rs.getInt("idplatos");
                 fila[1] = rs.getString("descripcion").trim();
                 fila[2] = rs.getString("precio").trim();
-                fila[3] = rs.getString("cantidad").trim();
+                fila[3] = rs.getString("tipo").trim();
                 mostrar.addRow(fila);
             }
 
@@ -216,8 +216,8 @@ public class cl_platos {
     public boolean modificar() {
         boolean modificar = false;
         st = c_conectar.conexion();
-        String sql = "Update platos setideclas_platos='" + idclas_platos + "', setdescripcion= '" + descripcion + "', setprecio='" + precio + "'"
-                + ", setcantidad = '" + cantidad + "'  wehere idplatos = '" + idplatos + "'";
+        String sql = "UPDATE platos SET idclas_platos='" + idclas_platos + "', descripcion= '" + descripcion + "',precio='" + precio + "'"
+                + " where idplatos = '" + idplatos + "'";
         int respuesta = c_conectar.actualiza(st, sql);
         if (respuesta > -1) {
             modificar = true;
@@ -228,7 +228,8 @@ public class cl_platos {
     public boolean insertar() {
         boolean grabar = false;
         st = c_conectar.conexion();
-        String squly = "insert into platos values('" + idplatos + "','" + descripcion + "','" + precio + "','" + cantidad + "','" + idclas_platos + "')";
+//        String squly = "insert into platos values('" + idplatos + "','" + descripcion + "','" + precio + "','" + cantidad + "','" + idclas_platos + "')";
+        String squly = "insert into platos values('" + idplatos + "','" + descripcion + "','" + precio + "','" + idclas_platos + "')";
         int respuesta = c_conectar.actualiza(st, squly);
         if (respuesta > -1) {
             grabar = true;

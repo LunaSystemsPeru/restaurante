@@ -211,8 +211,16 @@ public class cl_empleado {
                 fila[0] = rs.getInt("idempleados");
                 fila[1] = rs.getString("usuario");
                 fila[2] = rs.getString("nombres") + " " + rs.getString("apellidos").trim();
-                fila[3] = rs.getString("cargo").trim();
-                fila[4] = rs.getString("estado").trim();
+                String  cargo="";
+                if (rs.getInt("cargo")==0) {
+                    cargo="Administrador";
+                }else if (rs.getInt("cargo")==1) {
+                    cargo="Mozo";
+                }else if (rs.getInt("cargo")==2) {
+                    cargo="Cajero";
+                }
+                fila[3] = cargo;
+                fila[4] = (rs.getInt("estado")==1)?"Activo":"Inactivo";
 
                 mostrar.addRow(fila);
             }

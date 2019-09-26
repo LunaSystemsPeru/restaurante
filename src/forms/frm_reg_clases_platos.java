@@ -30,6 +30,12 @@ public class frm_reg_clases_platos extends javax.swing.JInternalFrame {
         txt_codigo.setEditable(false);
         txt_tipo.requestFocus();
         txt_codigo.setText(String.valueOf(c_clasep.generarCodigo()));
+        if(accion.equals("modificar")){
+            btn_modificar.setEnabled(true);
+            c_clasep.setId(idclas_platos);
+            c_clasep.obtenerDatos();
+            txt_tipo.setText(c_clasep.getTipo());
+        }
     }
 
     private void llenar() {
@@ -51,7 +57,7 @@ public class frm_reg_clases_platos extends javax.swing.JInternalFrame {
         txt_tipo = new javax.swing.JTextField();
         jToolBar1 = new javax.swing.JToolBar();
         btn_reg = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btn_modificar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btn_cerrar = new javax.swing.JButton();
 
@@ -88,17 +94,17 @@ public class frm_reg_clases_platos extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btn_reg);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/application_edit.png"))); // NOI18N
-        jButton1.setText("Modificar");
-        jButton1.setEnabled(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/application_edit.png"))); // NOI18N
+        btn_modificar.setText("Modificar");
+        btn_modificar.setEnabled(false);
+        btn_modificar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_modificar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_modificarActionPerformed(evt);
             }
         });
-        jToolBar1.add(jButton1);
+        jToolBar1.add(btn_modificar);
         jToolBar1.add(jSeparator1);
 
         btn_cerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/cancel.png"))); // NOI18N
@@ -174,18 +180,22 @@ public class frm_reg_clases_platos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_txt_tipoKeyPressed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
         // TODO add your handling code here:
         llenar();
+        c_clasep.setId(idclas_platos);
         c_clasep.modificar();
+        btn_modificar.setEnabled(false);
+        frm_ver_clases_platos formulario = new frm_ver_clases_platos();
+        c_varios.llamar_ventana(formulario);
         this.dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btn_modificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cerrar;
+    private javax.swing.JButton btn_modificar;
     public static javax.swing.JButton btn_reg;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JToolBar.Separator jSeparator1;

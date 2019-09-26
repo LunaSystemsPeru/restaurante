@@ -1,5 +1,5 @@
-
 package clases;
+
 import java.sql.*;
 import clases.cl_conectar;
 import java.util.ArrayList;
@@ -11,13 +11,14 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 public class cl_mesas {
- cl_conectar c_conectar = new cl_conectar();
- private Statement st;
- private ResultSet rs;
- private int idmesa;
- private int numero;
- private int estado;
- private int numerosillas;
+
+    cl_conectar c_conectar = new cl_conectar();
+    private Statement st;
+    private ResultSet rs;
+    private int idmesa;
+    private int numero;
+    private int estado;
+    private int numerosillas;
 
     /**
      * @return the idmesa
@@ -75,51 +76,51 @@ public class cl_mesas {
         this.numerosillas = numerosillas;
     }
 
-    
-    public boolean cargar (){
+    public boolean cargar() {
         boolean existe = false;
         try {
             st = c_conectar.conexion();
-            String sql = "select * from mesa where idmesa = '"+ idmesa +"'";
-            rs= c_conectar.consulta(st, sql);   
+            String sql = "select * from mesa where idmesa = '" + idmesa + "'";
+            rs = c_conectar.consulta(st, sql);
             if (rs.next()) {
-                idmesa=rs.getInt("idmesa");
+                idmesa = rs.getInt("idmesa");
                 numero = rs.getInt("numero");
                 estado = rs.getInt("estado");
-                numerosillas= rs.getInt("numerosillas");
+                numerosillas = rs.getInt("numerosillas");
                 existe = true;
             }
             c_conectar.cerrar(rs);
             c_conectar.cerrar(st);
-            
+
         } catch (Exception e) {
         }
         return existe;
     }
-    public boolean insertar (){
+
+    public boolean insertar() {
         boolean grabar = false;
-            st=c_conectar.conexion();
-            String sql ="INSERT INTO mesa VALUES ('"+idmesa+"','"+ numero +"','"+ estado +"','"+ numerosillas +"')";
-            System.out.println(sql);
-            int respuesta = c_conectar.actualiza(st, sql);
-            if (respuesta> - 1) {
-                grabar = true;
-            }
+        st = c_conectar.conexion();
+        String sql = "INSERT INTO mesa VALUES ('" + idmesa + "','" + numero + "','" + estado + "','" + numerosillas + "')";
+        System.out.println(sql);
+        int respuesta = c_conectar.actualiza(st, sql);
+        if (respuesta > - 1) {
+            grabar = true;
+        }
         return grabar;
     }
- 
-    public boolean modificar (){
+
+    public boolean modificar() {
         boolean modificar = false;
-        st  = c_conectar.conexion();
-        String sql = "Update mesa  setnumero = '"+ numero +"', setestado = '"+ estado +"', setnumerosillas = '"+ numerosillas +"' where idmesa = '"+idmesa+"'";
+        st = c_conectar.conexion();
+        String sql = "Update mesa  setnumero = '" + numero + "', setestado = '" + estado + "', setnumerosillas = '" + numerosillas + "' where idmesa = '" + idmesa + "'";
         int respuesta = c_conectar.actualiza(st, sql);
-            if (respuesta > - 1) {
-                modificar = true;
-            }
+        if (respuesta > - 1) {
+            modificar = true;
+        }
         return modificar;
     }
-    
-    public int obtener_codigo (){
+
+    public int obtener_codigo() {
         int codigo = 0;
         try {
             st = c_conectar.conexion();
@@ -127,7 +128,7 @@ public class cl_mesas {
             rs = c_conectar.consulta(st, sql);
             if (rs.next()) {
                 idmesa = rs.getInt("idmesa");
-               codigo = idmesa;
+                codigo = idmesa;
             }
         } catch (Exception e) {
         }
@@ -135,7 +136,7 @@ public class cl_mesas {
         c_conectar.cerrar(rs);
         return codigo;
     }
-    
+
     public void ver_mesa(JTable tabla, String query) {
         try {
             DefaultTableModel mostrar = new DefaultTableModel() {
@@ -160,7 +161,11 @@ public class cl_mesas {
 
                 fila[0] = rs.getInt("idmesa");
                 fila[1] = rs.getString("numero").trim();
-                fila[2] = rs.getString("estado").trim();
+                if (rs.getInt("estado")== 1) {
+                    fila[2] = "Activo";
+                } else {
+                    fila[2] = "Inactivo";
+                }
                 fila[3] = rs.getString("numerosillas").trim();
                 mostrar.addRow(fila);
             }
@@ -177,20 +182,20 @@ public class cl_mesas {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
-    
+
     public ArrayList obtener_mesass() {
-        ArrayList<ArrayList> clas_mesa=new ArrayList<>();
-        
+        ArrayList<ArrayList> clas_mesa = new ArrayList<>();
+
         ResultSet rsr;
         String query = "select * "
                 + "from mesa ";
         Statement sts = c_conectar.conexion();
         rsr = c_conectar.consulta(sts, query);
         try {
-            while(rsr.next()){
-                int id=rsr.getInt("idmesa");
-                int est=rsr.getInt("estado");
-                ArrayList fila_mesa=new ArrayList();
+            while (rsr.next()) {
+                int id = rsr.getInt("idmesa");
+                int est = rsr.getInt("estado");
+                ArrayList fila_mesa = new ArrayList();
                 fila_mesa.add(id);
                 fila_mesa.add(est);
                 clas_mesa.add(fila_mesa);
@@ -198,10 +203,10 @@ public class cl_mesas {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        
+
         return clas_mesa;
     }
-    
+
 //    public boolean eliminar (){
 //        boolean eliminar = false;
 //        try {

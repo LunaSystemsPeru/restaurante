@@ -105,9 +105,10 @@ public class cl_ingreso {
 
         try {
             Statement st = c_conectar.conexion();
-            String query = "select periodo, id_ingreso "
-                    + "from ingresos "
-                    + "where id_proveedor = '" + id_proveedor + "' and id_documento = '" + id_documento + "' and serie = '" + serie + "' and numero = '" + numero + "'";
+            String query = "select idingreso "
+                    + "from ingreso "
+                    + "where idproveedor = '" + id_proveedor + "' and idcomprobante = '"
+                    + id_documento + "' and serie = '" + serie + "' and numero = '" + numero + "'";
             ResultSet rs = c_conectar.consulta(st, query);
             while (rs.next()) {
                 existe = true;

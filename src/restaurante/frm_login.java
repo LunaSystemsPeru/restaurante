@@ -56,6 +56,7 @@ public class frm_login extends javax.swing.JFrame {
         jLabel7.setText("Inicio de Sesión");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 131, -1, -1));
 
+        txt_usuario.setText("usuario");
         txt_usuario.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_usuarioKeyPressed(evt);
@@ -77,6 +78,11 @@ public class frm_login extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(0, 204, 204));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setText("Iniciar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 220, 40));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/eliminar.png"))); // NOI18N
@@ -108,9 +114,9 @@ public class frm_login extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if (txt_pass.getText().equals("clave")) {
                 this.txt_pass.requestFocus();
-                this.dispose();
-                frm_menu menu = new frm_menu();
-                menu.setVisible(true);
+//                this.dispose();
+//                frm_menu menu = new frm_menu();
+//                menu.setVisible(true);
             } else {
                 Notification.show("login", "usuario no exixte", nicon.notify.core.Notification.ERROR_MESSAGE);
             }
@@ -142,6 +148,19 @@ public class frm_login extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        if (txt_usuario.getText().equals("usuario")) {
+            if (txt_pass.getText().equals("clave")) {
+                this.dispose();
+                frm_menu menu = new frm_menu();
+                menu.setVisible(true);
+            }
+        }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

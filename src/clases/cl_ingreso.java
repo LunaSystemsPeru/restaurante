@@ -127,8 +127,8 @@ public class cl_ingreso {
     public int obtener_codigo() {
         try {
             Statement st = c_conectar.conexion();
-            String query = "select ifnull(max(id_ingreso) + 1, 1) as codigo "
-                    + "from ingresos ";
+            String query = "select ifnull(max(idingreso) + 1, 1) as codigo "
+                    + "from ingreso ";
             ResultSet rs = c_conectar.consulta(st, query);
 
             while (rs.next()) {
@@ -162,30 +162,37 @@ public class cl_ingreso {
             mostrar.addColumn("Fecha");
             mostrar.addColumn("Documento");
             mostrar.addColumn("Proveedor");
-            mostrar.addColumn("Moneda");
             mostrar.addColumn("Total");
+            mostrar.addColumn("Usuario");
 
             while (rs.next()) {
                 Object fila[] = new Object[6];
 
-                fila[0] = rs.getString("periodo") + c_varios.ceros_izquieda_numero(3, rs.getInt("id_ingreso"));
+                fila[0] = c_varios.ceros_izquieda_numero(5, rs.getInt("idingreso"));
                 fila[1] = c_varios.formato_fecha_vista(rs.getString("fecha"));
                 fila[2] = rs.getString("abreviatura") + " / " + c_varios.ceros_izquieda_letras(4, rs.getString("serie")) + " - " + c_varios.ceros_izquieda_numero(7, rs.getInt("numero"));
                 fila[3] = rs.getString("num_documento") + " | " + rs.getString("razon_social");
-                fila[4] = "S/";
-                fila[5] = c_varios.formato_totales(rs.getDouble("total"));
+                fila[4] = c_varios.formato_numero(rs.getDouble("total"));
+                fila[5] = rs.getString("usuario");
                 mostrar.addRow(fila);
             }
-
+            
             c_conectar.cerrar(st);
             c_conectar.cerrar(rs);
             tabla.setModel(mostrar);
-            tabla.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(30);
             tabla.getColumnModel().getColumn(1).setPreferredWidth(60);
-            tabla.getColumnModel().getColumn(2).setPreferredWidth(100);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(120);
             tabla.getColumnModel().getColumn(3).setPreferredWidth(380);
-            tabla.getColumnModel().getColumn(4).setPreferredWidth(40);
-            tabla.getColumnModel().getColumn(5).setPreferredWidth(60);
+            tabla.getColumnModel().getColumn(4).setPreferredWidth(30);
+            tabla.getColumnModel().getColumn(5).setPreferredWidth(70);
+            
+            c_varios.centrar_celda(tabla, 0);
+            c_varios.centrar_celda(tabla, 1);
+            c_varios.centrar_celda(tabla, 2);
+            c_varios.centrar_celda(tabla, 5);
+            c_varios.derecha_celda(tabla, 4);
+            
 //            tabla.setDefaultRenderer(Object.class, new render_tables.render_ingresos());
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -196,7 +203,7 @@ public class cl_ingreso {
     public boolean insertar() {
         boolean grabado = false;
         Statement st = c_conectar.conexion();
-        String query = "insert into ingresos "
+        String query = "insert into ingreso "
                 + "Values ('" + id_ingreso + "', '" + fecha + "', '" + id_documento + "', '" + serie + "', "
                 + "'" + numero + "', '" + id_proveedor + "', '" + total + "', '" + id_usuario + "')";
         int resultado = c_conectar.actualiza(st, query);

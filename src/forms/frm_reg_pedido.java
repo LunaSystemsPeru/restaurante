@@ -163,7 +163,7 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         jPanel1.removeAll();
         jPanel1.setLayout(new GridLayout(3, 6, 4, 4));
         this.c_plato.setId_clases_platos(Integer.parseInt(id_tipo));
-        ArrayList<ArrayList> plato = this.c_plato.obtener_platos();
+        ArrayList<ArrayList> plato = this.c_plato.obtener_platos();//obtener platos
         String[] comidas = new String[18];
         String n_plato = "";
         boolean[] enable = new boolean[18];
@@ -257,13 +257,12 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         lbl_num_mesa = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_platos = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        jButton10 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
 
         jd_mesa.setTitle("Seleccione la Mesa");
 
@@ -287,6 +286,11 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         txt_nombre_plato.setEditable(false);
         txt_nombre_plato.setFont(new java.awt.Font("Arial", 1, 30)); // NOI18N
         txt_nombre_plato.setText("jTextField2");
+        txt_nombre_plato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_nombre_platoActionPerformed(evt);
+            }
+        });
         jd_producto_seleccionado.getContentPane().add(txt_nombre_plato, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 34, 461, 50));
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -339,7 +343,7 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 668, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,22 +391,12 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         tabla_platos.setShowVerticalLines(false);
         jScrollPane1.setViewportView(tabla_platos);
 
-        jButton1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jButton1.setText("Guardar");
-
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("S/ ");
 
-        jButton2.setText("E");
-        jButton2.setBorder(null);
-
-        jButton3.setText("D");
-        jButton3.setHideActionText(true);
-
-        jButton4.setText("L");
-
         jButton5.setText("Salir");
+        jButton5.setPreferredSize(new java.awt.Dimension(90, 25));
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -412,6 +406,30 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("0.00");
+
+        jButton10.setText("Editar");
+        jButton10.setHideActionText(true);
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("Eliminar");
+        jButton4.setHideActionText(true);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jButton9.setText("Guardar");
+        jButton9.setHideActionText(true);
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -425,28 +443,26 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextField1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_num_mesa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_num_mesa, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(3, 3, 3)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -461,20 +477,19 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton5))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -500,7 +515,7 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -531,7 +546,8 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         double precio=Double.parseDouble(this.c_plato.getPrecio());
         int cantidad=Integer.parseInt(this.jTextField3.getText());
-        Object[] fila={txt_nombre_plato.getText(),cantidad,precio,this.c_plato.getIdplatos()};
+        float subTotal=(float)(cantidad*precio);
+        Object[] fila={txt_nombre_plato.getText(),cantidad,precio,subTotal,this.c_plato.getIdplatos()};
         this.jTextField3.setText("1");
         double total=precio*cantidad+Double.parseDouble(this.jLabel6.getText());
         this.jLabel6.setText(total+"");
@@ -539,6 +555,27 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         this.jd_producto_seleccionado.dispose();
         
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        c_plato.setIdplatos(Integer.parseInt(this.mostrar.getValueAt(tabla_platos.getSelectedRow(),4)+""));
+        c_plato.obtener_datos();
+        txt_nombre_plato.setText("");
+        jTextField3.setText("");
+        llamar_dialog_plato();
+        
+    }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void txt_nombre_platoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombre_platoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nombre_platoActionPerformed
 
     private void formato_items(){
         mostrar = new DefaultTableModel() {
@@ -552,30 +589,33 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
             mostrar.addColumn("Plato");
             mostrar.addColumn("Cantidad");
             mostrar.addColumn("Precio");
+            mostrar.addColumn("Sub. Total");
             mostrar.addColumn("");
             tabla_platos.setModel(mostrar);
-            tabla_platos.getColumnModel().getColumn(0).setPreferredWidth(320);
+            tabla_platos.getColumnModel().getColumn(0).setPreferredWidth(305);
             tabla_platos.getColumnModel().getColumn(0).setResizable(false);
-            tabla_platos.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tabla_platos.getColumnModel().getColumn(1).setPreferredWidth(65);
             tabla_platos.getColumnModel().getColumn(1).setResizable(false);
-            tabla_platos.getColumnModel().getColumn(2).setPreferredWidth(100);
+            tabla_platos.getColumnModel().getColumn(2).setPreferredWidth(65);
             tabla_platos.getColumnModel().getColumn(2).setResizable(false);
-            tabla_platos.getColumnModel().getColumn(3).setPreferredWidth(0);
-            tabla_platos.getColumnModel().getColumn(3).setMaxWidth(0);
-            tabla_platos.getColumnModel().getColumn(3).setMinWidth(0);
+            tabla_platos.getColumnModel().getColumn(3).setPreferredWidth(75);
             tabla_platos.getColumnModel().getColumn(3).setResizable(false);
+            tabla_platos.getColumnModel().getColumn(4).setPreferredWidth(0);
+            tabla_platos.getColumnModel().getColumn(4).setMaxWidth(0);
+            tabla_platos.getColumnModel().getColumn(4).setMinWidth(0);
+            tabla_platos.getColumnModel().getColumn(4).setResizable(false);
+            
             
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

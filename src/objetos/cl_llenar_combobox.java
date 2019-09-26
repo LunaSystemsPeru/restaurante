@@ -38,7 +38,7 @@ public class cl_llenar_combobox {
     }
     
     public void verTodosDocumentosSunat (JComboBox combobox) {
-        String query = "select id_comprobante as id, nombre as descripcion "
+        String query = "select idcomprobante as id, nombre as descripcion "
                 + "from documento_sunat "
                 + "order by nombre asc ";
         llenar_combobox(combobox, query);

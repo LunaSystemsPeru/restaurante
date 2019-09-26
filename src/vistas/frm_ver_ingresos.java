@@ -5,6 +5,10 @@
  */
 package vistas;
 
+import clases.cl_ingreso;
+import clases.cl_varios;
+import forms.frm_reg_ingreso;
+
 /**
  *
  * @author BACA VARGAS
@@ -14,9 +18,24 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
     /**
      * Creates new form frm_ver_cliente
      */
+    int fila_seleccionada;
+    String query;
+    cl_ingreso c_ingreso = new cl_ingreso();
+    
+    cl_varios c_varios = new cl_varios();
+
     public frm_ver_ingresos() {
         initComponents();
+        String periodo = c_varios.obtener_periodo();
+        query = "SELECT i.idingreso, i.fecha, p.num_documento, p.razon_social,em.usuario, i.total,"
+                + "ds.abreviatura, i.serie, i.numero\n"
+                + "FROM ingreso AS i \n"
+                + "INNER JOIN proveedor AS p ON p.idproveedor = i.idproveedor \n"
+                + "INNER JOIN documento_sunat AS ds ON ds.idcomprobante = i.idcomprobante\n"
+                + "INNER JOIN empleados AS em ON em.idempleados = i.idempleados";
+        c_ingreso.ver_ingresos(t_ingresos, query);
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,7 +52,7 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
         t_ingresos = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jToolBar1 = new javax.swing.JToolBar();
-        btn_modificar = new javax.swing.JButton();
+        btn_agregar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         btn_eliminar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
@@ -74,16 +93,16 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
 
         jToolBar1.setFloatable(false);
 
-        btn_modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/application_edit.png"))); // NOI18N
-        btn_modificar.setText("Agregar");
-        btn_modificar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btn_modificar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btn_modificar.addActionListener(new java.awt.event.ActionListener() {
+        btn_agregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/application_edit.png"))); // NOI18N
+        btn_agregar.setText("Agregar");
+        btn_agregar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btn_agregar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btn_agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_modificarActionPerformed(evt);
+                btn_agregarActionPerformed(evt);
             }
         });
-        jToolBar1.add(btn_modificar);
+        jToolBar1.add(btn_agregar);
         jToolBar1.add(jSeparator2);
 
         btn_eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/delete.png"))); // NOI18N
@@ -150,7 +169,7 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_busKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_busKeyPressed
-    
+
     }//GEN-LAST:event_txt_busKeyPressed
 
     private void txt_busKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_busKeyReleased
@@ -167,22 +186,24 @@ public class frm_ver_ingresos extends javax.swing.JInternalFrame {
 //        c_cliente.ver_clientes(t_clientes, query);
     }//GEN-LAST:event_txt_busKeyTyped
 
-    private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
-       
-    }//GEN-LAST:event_btn_modificarActionPerformed
+    private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
+        frm_reg_ingreso formulario = new frm_reg_ingreso();
+        c_varios.llamar_ventana_completa(formulario);
+        dispose();
+    }//GEN-LAST:event_btn_agregarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
-      
+
     }//GEN-LAST:event_btn_eliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_agregar;
     private javax.swing.JButton btn_eliminar;
-    private javax.swing.JButton btn_modificar;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -6,6 +6,7 @@
 package restaurante;
 
 import clases.cl_varios;
+import forms.frm_reg_ingreso;
 import forms.frm_reg_pedido;
 import forms.frm_reg_platos;
 import java.awt.Dimension;
@@ -164,6 +165,11 @@ public class frm_menu extends javax.swing.JFrame {
         jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton8.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ingreso2 (2).png"))); // NOI18N
         jButton8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
         jToolBar2.add(jButton8);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/cajero.png"))); // NOI18N
@@ -369,7 +375,9 @@ public class frm_menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Reg_VentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Reg_VentaActionPerformed
-        // TODO add your handling code here:
+
+        frm_reg_pedido formulario = new frm_reg_pedido();
+        c_varios.llamar_ventana_completa(formulario);
     }//GEN-LAST:event_Reg_VentaActionPerformed
 
     private void jMenuItem18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem18ActionPerformed
@@ -448,6 +456,11 @@ public class frm_menu extends javax.swing.JFrame {
         frm_ver_platos formulario = new frm_ver_platos();
         c_varios.llamar_ventana(formulario);
     }//GEN-LAST:event_jMenuItem26ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        frm_ver_ingresos formulario=new frm_ver_ingresos();
+        c_varios.llamar_ventana_completa(formulario);
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments

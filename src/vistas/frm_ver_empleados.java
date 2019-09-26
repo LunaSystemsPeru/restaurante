@@ -1,16 +1,19 @@
-
 package vistas;
+
 import forms.frm_reg_empleado;
 import clases.cl_varios;
 import clases.cl_empleado;
+
 public class frm_ver_empleados extends javax.swing.JInternalFrame {
-int fila;
-cl_varios c_varios=new cl_varios();
-cl_empleado c_empleados=new cl_empleado();
+
+    int fila;
+    cl_varios c_varios = new cl_varios();
+    cl_empleado c_empleados = new cl_empleado();
+
     public frm_ver_empleados() {
         initComponents();
-     String query="SELECT idempleados,usuario,nombres,apellidos,estado,cargo FROM empleados ORDER BY apellidos ASC";
-     c_empleados.ver_empleados(t_empleados, query);
+        String query = "SELECT idempleados,usuario,nombres,apellidos,estado,cargo FROM empleados ORDER BY apellidos ASC";
+        c_empleados.ver_empleados(t_empleados, query);
     }
 
     /**
@@ -190,23 +193,22 @@ cl_empleado c_empleados=new cl_empleado();
     }//GEN-LAST:event_txt_busKeyTyped
 
     private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
-      if(fila>-1){
-          frm_reg_empleado.id_empleado=Integer.parseInt(t_empleados.getValueAt(fila,0).toString());
-          frm_reg_empleado.accion=false;
-          frm_reg_empleado frm_empleados=new frm_reg_empleado();
-        c_varios.llamar_ventana_completa(frm_empleados);
-         this.dispose();
-          
-          
-      }
+        if (fila > -1) {
+            frm_reg_empleado.id_empleado = Integer.parseInt(t_empleados.getValueAt(fila, 0).toString());
+            frm_reg_empleado.accion = false;
+            frm_reg_empleado frm_empleados = new frm_reg_empleado();
+            c_varios.llamar_ventana_completa(frm_empleados);
+            this.dispose();
+
+        }
     }//GEN-LAST:event_btn_modificarActionPerformed
 
     private void t_empleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t_empleadosMouseClicked
         // TODO add your handling code here:
-        fila=t_empleados.getSelectedRow();
-        if(fila>-1){
+        fila = t_empleados.getSelectedRow();
+        if (fila > -1) {
             btn_modificar.setEnabled(true);
-           // jTextField1.setText(String.valueOf(fila));
+            // jTextField1.setText(String.valueOf(fila));
         }
     }//GEN-LAST:event_t_empleadosMouseClicked
 
@@ -216,7 +218,7 @@ cl_empleado c_empleados=new cl_empleado();
         frm_reg_empleado frm_empleados = new frm_reg_empleado();
         c_varios.llamar_ventana(frm_empleados);
         this.dispose();
-        
+
     }//GEN-LAST:event_btn_regActionPerformed
 
 

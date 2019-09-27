@@ -136,13 +136,34 @@ public class cl_pedido {
             String query = "select * from pedido where idpedido = '" + id_pedido + "'";
             rs = c_conectar.consulta(st, query);
             if (rs.next()) {
-                id_pedido = rs.getInt("idplatos");
                 id_mesa = rs.getInt("id_mesa");
                 fecha = rs.getString("fecha");
                 total = rs.getFloat("total");
                 fecha_registro = rs.getString("fecha_registro");
                 id_empleado = rs.getInt("id_empleado");
                 estado = rs.getInt("estado");
+                existe = true;
+            }
+
+            c_conectar.cerrar(rs);
+            c_conectar.cerrar(st);
+        } catch (SQLException e) {
+            System.out.println(e.getLocalizedMessage());
+        }
+        return existe;
+    }
+    
+    public boolean obtener_ultimo_pedido_por_mesa() {
+        boolean existe = false;
+
+        try {
+            st = c_conectar.conexion();
+            String query = "select max(idpedido) as idpedido "
+                    + "from pedido "
+                    + "where idmesa = '" + id_mesa + "' and fecha = current_date() and estado = 1";
+            rs = c_conectar.consulta(st, query);
+            if (rs.next()) {
+                id_pedido = rs.getInt("idpedido");
                 existe = true;
             }
 

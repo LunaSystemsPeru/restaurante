@@ -54,7 +54,7 @@ public class cl_platos {
      * @param descripcion the descripcion to set
      */
     public void setdescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.descripcion = descripcion.toUpperCase();
     }
 
     /**

@@ -177,7 +177,7 @@ public class frm_reg_documento_sunat extends javax.swing.JInternalFrame {
         llenar();
         c_documento_sunat.insertar();
         frm_ver_documento frm_documento = new frm_ver_documento();
-        c_varios.llamar_ventana_completa(frm_documento);
+        c_varios.llamar_ventana(frm_documento);
         this.dispose();
     }//GEN-LAST:event_btn_regActionPerformed
 

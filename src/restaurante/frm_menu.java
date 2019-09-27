@@ -5,7 +5,9 @@
  */
 package restaurante;
 
+import clases.cl_empleado;
 import clases.cl_varios;
+import forms.frm_reg_cobros;
 import forms.frm_reg_ingreso;
 import forms.frm_reg_pedido;
 import forms.frm_reg_platos;
@@ -28,6 +30,7 @@ import vistas.*;
 public class frm_menu extends javax.swing.JFrame {
 
     cl_varios c_varios = new cl_varios();
+    public static cl_empleado c_empleado = new cl_empleado();
 
     public frm_menu() {
         initComponents();
@@ -47,11 +50,16 @@ public class frm_menu extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jToolBar2 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jSeparator4 = new javax.swing.JToolBar.Separator();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
+        jSeparator5 = new javax.swing.JToolBar.Separator();
+        jButton3 = new javax.swing.JButton();
+        jSeparator6 = new javax.swing.JToolBar.Separator();
         jButton6 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
+        jSeparator7 = new javax.swing.JToolBar.Separator();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -79,8 +87,8 @@ public class frm_menu extends javax.swing.JFrame {
         jMenuItem21 = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem8 = new javax.swing.JMenuItem();
         jMenuItem22 = new javax.swing.JMenuItem();
 
         jMenuItem25.setText("jMenuItem25");
@@ -107,19 +115,18 @@ public class frm_menu extends javax.swing.JFrame {
         });
         jToolBar2.add(jButton1);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/insumos (1).png"))); // NOI18N
-        jButton3.setText("Platos");
-        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/insumos (2).png"))); // NOI18N
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/cajero.png"))); // NOI18N
+        jButton7.setText("Cobrar");
+        jButton7.setFocusable(false);
+        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButton7ActionPerformed(evt);
             }
         });
-        jToolBar2.add(jButton3);
+        jToolBar2.add(jButton7);
+        jToolBar2.add(jSeparator4);
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/platos.png"))); // NOI18N
         jButton4.setText("Ver Venta");
@@ -128,6 +135,11 @@ public class frm_menu extends javax.swing.JFrame {
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton4.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/platos2.png"))); // NOI18N
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
         jToolBar2.add(jButton4);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/clientes.png"))); // NOI18N
@@ -143,6 +155,22 @@ public class frm_menu extends javax.swing.JFrame {
             }
         });
         jToolBar2.add(jButton5);
+        jToolBar2.add(jSeparator5);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/insumos (1).png"))); // NOI18N
+        jButton3.setText("Platos");
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton3.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/insumos (2).png"))); // NOI18N
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jToolBar2.add(jButton3);
+        jToolBar2.add(jSeparator6);
 
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/proveedor.png"))); // NOI18N
         jButton6.setText(" Proveedor");
@@ -171,8 +199,9 @@ public class frm_menu extends javax.swing.JFrame {
             }
         });
         jToolBar2.add(jButton8);
+        jToolBar2.add(jSeparator7);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/cajero.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/ver venta (1).png"))); // NOI18N
         jButton2.setText("Caja");
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setFocusable(false);
@@ -204,7 +233,7 @@ public class frm_menu extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 321, Short.MAX_VALUE)
+                .addGap(0, 221, Short.MAX_VALUE)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -332,6 +361,14 @@ public class frm_menu extends javax.swing.JFrame {
         });
         jMenu5.add(jMenuItem3);
 
+        jMenuItem4.setText("Mis Documentos Empresa");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu5.add(jMenuItem4);
+
         jMenuItem8.setText("Mesas");
         jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -339,9 +376,6 @@ public class frm_menu extends javax.swing.JFrame {
             }
         });
         jMenu5.add(jMenuItem8);
-
-        jMenuItem4.setText("Documentos Empresa");
-        jMenu5.add(jMenuItem4);
 
         jMenuItem22.setText("Respaldo de la Informacion");
         jMenuItem22.addActionListener(new java.awt.event.ActionListener() {
@@ -438,12 +472,12 @@ public class frm_menu extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         frm_ver_proveedor formulario = new frm_ver_proveedor();
-        c_varios.llamar_ventana(formulario);
+        c_varios.llamar_ventana_completa(formulario);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         frm_ver_cliente formulario = new frm_ver_cliente();
-        c_varios.llamar_ventana(formulario);
+        c_varios.llamar_ventana_completa(formulario);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
@@ -460,6 +494,21 @@ public class frm_menu extends javax.swing.JFrame {
         frm_ver_ingresos formulario = new frm_ver_ingresos();
         c_varios.llamar_ventana_completa(formulario);
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        frm_reg_cobros formulario = new frm_reg_cobros();
+        c_varios.llamar_ventana(formulario);
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        frm_ver_mis_documento formulario = new frm_ver_mis_documento();
+        c_varios.llamar_ventana(formulario);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        frm_ver_ventas formulario = new frm_ver_ventas();
+        c_varios.llamar_ventana_completa(formulario);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -505,6 +554,7 @@ public class frm_menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     public static javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel2;
@@ -535,6 +585,10 @@ public class frm_menu extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JToolBar.Separator jSeparator4;
+    private javax.swing.JToolBar.Separator jSeparator5;
+    private javax.swing.JToolBar.Separator jSeparator6;
+    private javax.swing.JToolBar.Separator jSeparator7;
     private javax.swing.JToolBar jToolBar2;
     // End of variables declaration//GEN-END:variables
 

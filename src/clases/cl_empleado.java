@@ -177,6 +177,25 @@ public class cl_empleado {
         c_conectar.cerrar(rs);
         return si;
     }
+    
+    public boolean validar_usuario() {
+        boolean si = false;
+        try {
+            st = c_conectar.conexion();
+            String query = "SELECT idempleados from empleados "
+                    + "where usuario ='" + usuario + "'";
+            rs = c_conectar.consulta(st, query);
+            while (rs.next()) {
+                id_empleados = rs.getInt("idempleados");
+                si = true;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
+        }
+        c_conectar.cerrar(st);
+        c_conectar.cerrar(rs);
+        return si;
+    }
 
     public void ver_empleados(JTable tabla, String query) {
         try {
@@ -212,12 +231,18 @@ public class cl_empleado {
                 fila[1] = rs.getString("usuario");
                 fila[2] = rs.getString("nombres") + " " + rs.getString("apellidos").trim();
                 String  cargo="";
-                if (rs.getInt("cargo")==0) {
-                    cargo="Administrador";
-                }else if (rs.getInt("cargo")==1) {
-                    cargo="Mozo";
-                }else if (rs.getInt("cargo")==2) {
-                    cargo="Cajero";
+                switch (rs.getInt("cargo")) {
+                    case 0:
+                        cargo="Administrador";
+                        break;
+                    case 1:
+                        cargo="Mozo";
+                        break;
+                    case 2:
+                        cargo="Cajero";
+                        break;
+                    default:
+                        break;
                 }
                 fila[3] = cargo;
                 fila[4] = (rs.getInt("estado")==1)?"Activo":"Inactivo";

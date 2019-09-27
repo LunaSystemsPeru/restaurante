@@ -1,12 +1,14 @@
 package restaurante;
 
 import clases.cl_conectar;
+import clases.cl_empleado;
 import java.awt.event.KeyEvent;
 import nicon.notify.core.Notification;
 
 public class frm_login extends javax.swing.JFrame {
 
     cl_conectar c_conectar = new cl_conectar();
+    cl_empleado c_empleado = new cl_empleado();
 
     public frm_login() {
         initComponents();
@@ -29,7 +31,7 @@ public class frm_login extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txt_usuario = new javax.swing.JTextField();
         txt_pass = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        btn_entrar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -37,6 +39,7 @@ public class frm_login extends javax.swing.JFrame {
         jLabel9.setText("jLabel9");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Acceder al Sistema");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 0, -1, -1));
 
@@ -56,18 +59,18 @@ public class frm_login extends javax.swing.JFrame {
         jLabel7.setText("Inicio de Sesión");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(141, 131, -1, -1));
 
-        txt_usuario.setText("usuario");
         txt_usuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txt_usuarioKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txt_usuarioKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_usuarioKeyPressed(evt);
             }
         });
         jPanel1.add(txt_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 168, 170, 30));
 
-        txt_pass.setText("clave");
+        txt_pass.setText("sdasd");
+        txt_pass.setEnabled(false);
         txt_pass.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_passKeyPressed(evt);
@@ -75,15 +78,16 @@ public class frm_login extends javax.swing.JFrame {
         });
         jPanel1.add(txt_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 222, 170, 30));
 
-        jButton1.setBackground(new java.awt.Color(0, 204, 204));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setText("Iniciar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btn_entrar.setBackground(new java.awt.Color(0, 204, 204));
+        btn_entrar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btn_entrar.setText("Iniciar");
+        btn_entrar.setEnabled(false);
+        btn_entrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btn_entrarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 220, 40));
+        jPanel1.add(btn_entrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 220, 40));
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/eliminar.png"))); // NOI18N
         jButton2.setBorderPainted(false);
@@ -112,13 +116,14 @@ public class frm_login extends javax.swing.JFrame {
 
     private void txt_passKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (txt_pass.getText().equals("clave")) {
-                this.txt_pass.requestFocus();
-//                this.dispose();
-//                frm_menu menu = new frm_menu();
-//                menu.setVisible(true);
+            c_empleado.obtener_datos();
+            if (txt_pass.getText().equals(c_empleado.getPassword())) {
+                btn_entrar.setEnabled(true);
+                btn_entrar.requestFocus();
             } else {
                 Notification.show("login", "usuario no exixte", nicon.notify.core.Notification.ERROR_MESSAGE);
+                txt_pass.selectAll();
+                txt_pass.requestFocus();
             }
         }
     }//GEN-LAST:event_txt_passKeyPressed
@@ -136,10 +141,16 @@ public class frm_login extends javax.swing.JFrame {
 
     private void txt_usuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_usuarioKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (txt_usuario.getText().equals("usuario")) {
+            String usuario = txt_usuario.getText();
+            c_empleado.setUsuario(usuario);
+            if (c_empleado.validar_usuario()) {
+                txt_pass.setText("");
+                txt_pass.setEnabled(true);
                 this.txt_pass.requestFocus();
             } else {
                 Notification.show("login", "usuario no exixte", nicon.notify.core.Notification.ERROR_MESSAGE);
+                txt_usuario.selectAll();
+                txt_usuario.requestFocus();
             }
         }
     }//GEN-LAST:event_txt_usuarioKeyPressed
@@ -149,18 +160,12 @@ public class frm_login extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        if (txt_usuario.getText().equals("usuario")) {
-            if (txt_pass.getText().equals("clave")) {
-                this.dispose();
-                frm_menu menu = new frm_menu();
-                menu.setVisible(true);
-            }
-        }
-
-
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btn_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrarActionPerformed
+        frm_menu.c_empleado.setId_empleados(c_empleado.getId_empleados());
+        frm_menu menu = new frm_menu();
+        this.dispose();
+        menu.setVisible(true);
+    }//GEN-LAST:event_btn_entrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,7 +204,7 @@ public class frm_login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btn_entrar;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

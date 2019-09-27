@@ -20,13 +20,14 @@ import javax.swing.table.TableRowSorter;
  * @author luis
  */
 public class cl_documento_empresa {
+
     cl_conectar c_conectar = new cl_conectar();
-    
+
     private int id_comprobante;
     private String serie;
     private int numero;
-    
-     private Statement st;
+
+    private Statement st;
     private ResultSet rs;
 
     public cl_documento_empresa() {
@@ -55,7 +56,7 @@ public class cl_documento_empresa {
     public void setNumero(int numero) {
         this.numero = numero;
     }
-    
+
     public boolean insertar() {
         boolean grabar = false;
         st = c_conectar.conexion();
@@ -67,8 +68,24 @@ public class cl_documento_empresa {
         }
         return grabar;
     }
-    
-    public void ver_ingresos(JTable tabla, String query) {
+
+    public void obtener_datos() {
+        try {
+            st = c_conectar.conexion();
+            String query = "SELECT * FROM documentos_empresa WHERE idcomprobante ='" + id_comprobante + "'";
+            rs = c_conectar.consulta(st, query);
+            while (rs.next()) {
+                serie = rs.getString("serie");
+                numero = rs.getInt("numero");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getLocalizedMessage());
+        }
+        c_conectar.cerrar(st);
+        c_conectar.cerrar(rs);
+    }
+
+    public void mostrar(JTable tabla, String query) {
         try {
             DefaultTableModel mostrar = new DefaultTableModel() {
                 @Override
@@ -94,7 +111,7 @@ public class cl_documento_empresa {
                 fila[1] = rs.getString("nombre");
                 fila[2] = rs.getString("serie");
                 fila[3] = rs.getString("numero");
-               mostrar.addRow(fila);
+                mostrar.addRow(fila);
             }
 
             c_conectar.cerrar(st);

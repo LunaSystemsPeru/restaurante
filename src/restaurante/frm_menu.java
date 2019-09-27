@@ -375,8 +375,7 @@ public class frm_menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Reg_VentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Reg_VentaActionPerformed
-
-        frm_reg_pedido formulario = new frm_reg_pedido();
+        frm_ver_pedidos formulario = new frm_ver_pedidos();
         c_varios.llamar_ventana_completa(formulario);
     }//GEN-LAST:event_Reg_VentaActionPerformed
 
@@ -458,7 +457,7 @@ public class frm_menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem26ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        frm_ver_ingresos formulario=new frm_ver_ingresos();
+        frm_ver_ingresos formulario = new frm_ver_ingresos();
         c_varios.llamar_ventana_completa(formulario);
     }//GEN-LAST:event_jButton8ActionPerformed
 

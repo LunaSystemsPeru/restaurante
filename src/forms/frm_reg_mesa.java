@@ -32,6 +32,9 @@ public class frm_reg_mesa extends javax.swing.JInternalFrame {
             c_mesa.cargar();
             txt_numero.setText(c_mesa.getNumero() + "");
             txt_num_sillas.setValue(c_mesa.getNumerosillas());
+        } else {
+            c_mesa.obtener_codigo();
+            txt_numero.setText(c_mesa.getIdmesa() + "");
         }
         txt_numero.requestFocus();
     }

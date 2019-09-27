@@ -59,7 +59,6 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
     private void llamar_dialog_plato() {
         jd_producto_seleccionado.setModal(true);
         jd_producto_seleccionado.setSize(500, 340);
-
         jd_producto_seleccionado.setLocationRelativeTo(null);
         jd_producto_seleccionado.setVisible(true);
     }
@@ -84,40 +83,50 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
     }
 
     private void llamar_mesas() {
-        //Creacion de botones
+        //aqui se obtiene las mesas segun base de datos
         ArrayList<ArrayList> array_mesa = this.c_mesa.obtener_mesass();
+
+        //se define el grid
         JButton boton[] = new JButton[20];
         jd_mesa.setLayout(new GridLayout(5, 4, 4, 4));
+        //se muestra 20 botone
         for (int i = 0; i < 20; i++) {
             boton[i] = new JButton(String.valueOf(i + 1));
             boton[i].setFont(new Font("Arial", Font.BOLD, 18));
             boton[i].setVerticalTextPosition(SwingConstants.CENTER);
         }
 
+        //se vuelve a correr los 20 botones, pero se compara si existe en el array mesa
         for (int i = 0; i < 20; i++) {
             jd_mesa.add(boton[i]);
+            //se compara el tamaño del array con 20, los faltantes se desabilitan
             if (i >= array_mesa.size()) {
                 boton[i].setEnabled(false);
             } else {
+                //para los q estan en el array se programa el action
+                //al momento de hacer clic se envia el numero de mesa al label
+                // y se guarda en id_mesa
                 String num_mesa = array_mesa.get(i).get(0).toString();
                 boton[i].addActionListener(new java.awt.event.ActionListener() {
                     @Override
                     public void actionPerformed(java.awt.event.ActionEvent evt) {
-                        lbl_num_mesa.setText(num_mesa);
                         jd_mesa.dispose();
                         id_mesa = Integer.parseInt(num_mesa);
+                        lbl_num_mesa.setText(id_mesa + "");
                     }
                 });
             }
 
         }
+
+        //aqui se define el color del boton segun el estado
         for (int i = 0; i < array_mesa.size(); i++) {
             if ("1".equals(array_mesa.get(i).get(1).toString())) {
                 boton[i].setBackground(Color.red);
-                boton[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/mesa_libre.png")));
+                boton[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/mesa_libre_" + (i + 1) + ".png")));
             } else {
                 boton[i].setBackground(Color.GREEN);
-                boton[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/mesa_ocupada.png")));
+                boton[i].setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/mesa_ocupada_" + (i + 1) + ".png")));
             }
         }
     }

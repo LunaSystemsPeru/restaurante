@@ -1,6 +1,5 @@
 package clases;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,7 +13,6 @@ import javax.swing.table.TableRowSorter;
 public class cl_pedido {
 
     cl_conectar c_conectar = new cl_conectar();
-    Connection con;
     Statement st;
     ResultSet rs;
 
@@ -82,51 +80,57 @@ public class cl_pedido {
         this.estado = estado;
     }
 
-//    public void ver_platos(JTable tabla, String query) {
-//        try {
-//            DefaultTableModel mostrar = new DefaultTableModel() {
-//                @Override
-//                public boolean isCellEditable(int fila, int columna) {
-//                    return false;
-//                }
-//            };
-//            Statement st = c_conectar.conexion();
-//            ResultSet rs = c_conectar.consulta(st, query);
-//
-//            RowSorter<TableModel> sorter = new TableRowSorter<>(mostrar);
-//            tabla.setRowSorter(sorter);
-//
-//            mostrar.addColumn("Codigo");
-//            mostrar.addColumn("nombre");
-//            mostrar.addColumn("precio");
-//            mostrar.addColumn("Clasificacion");
-//
-//            while (rs.next()) {
-//                Object fila[] = new Object[4];
-//
-//                fila[0] = rs.getInt("idplatos");
-//                fila[1] = rs.getString("descripcion").trim();
-//                fila[2] = rs.getString("precio").trim();
-//                fila[3] = rs.getString("tipo").trim();
-//                mostrar.addRow(fila);
-//            }
-//
-//            c_conectar.cerrar(st);
-//            //c_conectar.cerrar(rs);
-//            tabla.setModel(mostrar);
-//            tabla.getColumnModel().getColumn(0).setPreferredWidth(50);
-//            tabla.getColumnModel().getColumn(1).setPreferredWidth(100);
-//            tabla.getColumnModel().getColumn(2).setPreferredWidth(80);
-//            tabla.getColumnModel().getColumn(3).setPreferredWidth(100);
-//        } catch (SQLException ex) {
-//            System.out.println(ex);
-//            JOptionPane.showMessageDialog(null, ex);
-//        }
-//    }
-    
+    public void mostrar(JTable tabla, String query) {
+        try {
+            DefaultTableModel mostrar = new DefaultTableModel() {
+                @Override
+                public boolean isCellEditable(int fila, int columna) {
+                    return false;
+                }
+            };
+            st = c_conectar.conexion();
+            rs = c_conectar.consulta(st, query);
+
+            RowSorter<TableModel> sorter = new TableRowSorter<>(mostrar);
+            tabla.setRowSorter(sorter);
+
+            mostrar.addColumn("Codigo");
+            mostrar.addColumn("Fecha");
+            mostrar.addColumn("Usuario");
+            mostrar.addColumn("Mesa");
+            mostrar.addColumn("Total");
+            mostrar.addColumn("Estado");
+
+            while (rs.next()) {
+                Object fila[] = new Object[6];
+
+                fila[0] = rs.getInt("idpedido");
+                fila[1] = rs.getString("fecha");
+                fila[2] = rs.getString("usuario").trim();
+                fila[3] = rs.getInt("idmesa");
+                fila[4] = rs.getDouble("total");
+
+                int iestado = rs.getInt("estado");
+                if (iestado == 1) {
+                    fila[5] = "POR COBRAR";
+                } else {
+                    fila[5] = "FINALIZADO";
+                }
+                mostrar.addRow(fila);
+            }
+
+            c_conectar.cerrar(st);
+            c_conectar.cerrar(rs);
+            tabla.setModel(mostrar);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+
     public boolean obtener_datos() {
         boolean existe = false;
-        
+
         try {
             st = c_conectar.conexion();
             String query = "select * from pedido where idpedido = '" + id_pedido + "'";
@@ -141,7 +145,7 @@ public class cl_pedido {
                 estado = rs.getInt("estado");
                 existe = true;
             }
-            
+
             c_conectar.cerrar(rs);
             c_conectar.cerrar(st);
         } catch (SQLException e) {
@@ -149,44 +153,42 @@ public class cl_pedido {
         }
         return existe;
     }
-    
-    
+
     public boolean modificar() {
         boolean modificar = false;
         st = c_conectar.conexion();
         String sql = "UPDATE pedido SET    id_pedido='" + id_pedido + "',"
-                                        + "id_mesa= '" + id_mesa + "',"
-                                        + "fecha='" + fecha + "',"
-                                        + "total='" + total + "',"
-                                        + "fecha_registro='" + fecha_registro + "',"
-                                        + "id_empleado='" + id_empleado + "',"
-                                        + "estado='" + estado + "'"
-                                        + " where id_pedido = '" + id_pedido + "'";
+                + "id_mesa= '" + id_mesa + "',"
+                + "fecha='" + fecha + "',"
+                + "total='" + total + "',"
+                + "fecha_registro='" + fecha_registro + "',"
+                + "id_empleado='" + id_empleado + "',"
+                + "estado='" + estado + "'"
+                + " where id_pedido = '" + id_pedido + "'";
         int respuesta = c_conectar.actualiza(st, sql);
         if (respuesta > -1) {
             modificar = true;
         }
         return modificar;
     }
-    
+
     public boolean insertar() {
         boolean grabar = false;
         st = c_conectar.conexion();
         String squly = "insert into pedido values('" + id_pedido + "',"
-                                                    + "'"+id_mesa+"',"
-                                                    + "'"+fecha+"',"
-                                                    + "'"+total+"',"
-                                                    + "CURRENT_TIMESTAMP(),"
-                                                    + "'"+id_empleado+"',"
-                                                    + "'1')";
+                + "'" + id_mesa + "',"
+                + "'" + fecha + "',"
+                + "'" + total + "',"
+                + "CURRENT_TIMESTAMP(),"
+                + "'" + id_empleado + "',"
+                + "'1')";
         int respuesta = c_conectar.actualiza(st, squly);
         if (respuesta > -1) {
             grabar = true;
         }
         return grabar;
     }
-    
-    
+
     public int obtener_codigo() {
         int codigo = 0;
         try {

@@ -53,7 +53,6 @@ public class frm_menu extends javax.swing.JFrame {
         jButton7 = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
         jButton3 = new javax.swing.JButton();
         jSeparator6 = new javax.swing.JToolBar.Separator();
@@ -141,20 +140,6 @@ public class frm_menu extends javax.swing.JFrame {
             }
         });
         jToolBar2.add(jButton4);
-
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/clientes.png"))); // NOI18N
-        jButton5.setText("Clientes");
-        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton5.setFocusable(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/clientes2.png"))); // NOI18N
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-        jToolBar2.add(jButton5);
         jToolBar2.add(jSeparator5);
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/insumos (1).png"))); // NOI18N
@@ -233,7 +218,7 @@ public class frm_menu extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 221, Short.MAX_VALUE)
+                .addGap(0, 276, Short.MAX_VALUE)
                 .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -452,6 +437,7 @@ public class frm_menu extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         frm_ver_platos formulario = new frm_ver_platos();
+        
         c_varios.llamar_ventana(formulario);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -474,11 +460,6 @@ public class frm_menu extends javax.swing.JFrame {
         frm_ver_proveedor formulario = new frm_ver_proveedor();
         c_varios.llamar_ventana_completa(formulario);
     }//GEN-LAST:event_jButton6ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        frm_ver_cliente formulario = new frm_ver_cliente();
-        c_varios.llamar_ventana_completa(formulario);
-    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         frm_ver_mesas formulario = new frm_ver_mesas();
@@ -552,7 +533,6 @@ public class frm_menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;

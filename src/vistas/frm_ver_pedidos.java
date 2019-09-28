@@ -22,6 +22,7 @@ public class frm_ver_pedidos extends javax.swing.JInternalFrame {
     String sql;
     int fila = -1;
     String fecha = c_varios.getFechaActual();
+    private String query;
 
     /**
      * Creates new form frm_ver_platos
@@ -32,7 +33,7 @@ public class frm_ver_pedidos extends javax.swing.JInternalFrame {
                 + "inner join empleados as e on e.idempleados = p.idempleados "
                 + "where p.fecha = '" + fecha + "' "
                 + "order by p.idpedido asc";
-        c_pedido.mostrar(tbl_plato, sql);
+        c_pedido.mostrar(tbl_pedido, sql);
     }
 
     /**
@@ -47,13 +48,13 @@ public class frm_ver_pedidos extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         txt_bus = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbl_plato = new javax.swing.JTable();
+        tbl_pedido = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
         btn_ver_detalle = new javax.swing.JButton();
         btn_eliminar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btn_salir = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbx_boton = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
 
         setTitle("Ver Pedidos del Dia");
@@ -73,7 +74,7 @@ public class frm_ver_pedidos extends javax.swing.JInternalFrame {
             }
         });
 
-        tbl_plato.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_pedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -84,12 +85,12 @@ public class frm_ver_pedidos extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbl_plato.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbl_pedido.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_platoMouseClicked(evt);
+                tbl_pedidoMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tbl_plato);
+        jScrollPane2.setViewportView(tbl_pedido);
 
         jToolBar1.setFloatable(false);
 
@@ -129,7 +130,12 @@ public class frm_ver_pedidos extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btn_salir);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "POR COBRAR", "FINALIZADOS", "TODOS" }));
+        cbx_boton.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "POR COBRAR", "FINALIZADOS", "TODOS" }));
+        cbx_boton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_botonActionPerformed(evt);
+            }
+        });
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "POR FECHA", "POR MESA" }));
 
@@ -148,8 +154,8 @@ public class frm_ver_pedidos extends javax.swing.JInternalFrame {
                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_bus, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
+                        .addComponent(cbx_boton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -160,7 +166,7 @@ public class frm_ver_pedidos extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(txt_bus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbx_boton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
@@ -189,7 +195,7 @@ public class frm_ver_pedidos extends javax.swing.JInternalFrame {
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String bus = txt_bus.getText();
-            c_pedido.mostrar(tbl_plato, sql);
+            c_pedido.mostrar(tbl_pedido, sql);
 
         }
     }//GEN-LAST:event_txt_busKeyPressed
@@ -208,24 +214,51 @@ public class frm_ver_pedidos extends javax.swing.JInternalFrame {
         //        c_cliente.ver_clientes(t_clientes, query);
     }//GEN-LAST:event_txt_busKeyTyped
 
-    private void tbl_platoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_platoMouseClicked
+    private void tbl_pedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_pedidoMouseClicked
         // TODO add your handling code here:
-        fila = tbl_plato.getSelectedRow();
+        fila = tbl_pedido.getSelectedRow();
         btn_ver_detalle.setEnabled(true);
-    }//GEN-LAST:event_tbl_platoMouseClicked
+    }//GEN-LAST:event_tbl_pedidoMouseClicked
+
+    private void cbx_botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_botonActionPerformed
+        int pedido = cbx_boton.getSelectedIndex();
+        // POR COBRAR
+        if (pedido == 0) {
+            query = "select p.idpedido, p.fecha, p.idmesa, p.total, p.estado, e.usuario from pedido as p "
+                    + "inner join empleados as e on e.idempleados = p.idempleados "
+                    + "where p.estado = '1' "
+                    + "order by p.idpedido asc";
+        }
+        // POR FINALIZADOS
+        if (pedido == 1) {
+            query = "select p.idpedido, p.fecha, p.idmesa, p.total, p.estado, e.usuario from pedido as p "
+                    + "inner join empleados as e on e.idempleados = p.idempleados "
+                    + "where p.estado = '2' "
+                    + "order by p.idpedido asc";
+
+        }
+        // TODOS
+        if (pedido == 2) {
+            query = "select p.idpedido, p.fecha, p.idmesa, p.total, p.estado, e.usuario from pedido as p "
+                    + "inner join empleados as e on e.idempleados = p.idempleados "
+                    + "order by p.idpedido asc";
+        }
+               c_pedido.mostrar(tbl_pedido, query);
+
+    }//GEN-LAST:event_cbx_botonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_eliminar;
     private javax.swing.JButton btn_salir;
     private javax.swing.JButton btn_ver_detalle;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbx_boton;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JTable tbl_plato;
+    private javax.swing.JTable tbl_pedido;
     private javax.swing.JTextField txt_bus;
     // End of variables declaration//GEN-END:variables
 }

@@ -140,7 +140,12 @@ public class frm_reg_cobros extends javax.swing.JInternalFrame {
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/computer.png"))); // NOI18N
         jButton3.setText("Imprimir Ticket");
 
-        cbx_mesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2" }));
+        cbx_mesa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4" }));
+        cbx_mesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_mesaActionPerformed(evt);
+            }
+        });
         cbx_mesa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 cbx_mesaKeyPressed(evt);
@@ -482,6 +487,10 @@ public class frm_reg_cobros extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_txt_tarjetaKeyPressed
+
+    private void cbx_mesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_mesaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbx_mesaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

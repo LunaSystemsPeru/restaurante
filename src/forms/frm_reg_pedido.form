@@ -4,6 +4,7 @@
   <NonVisualComponents>
     <Container class="javax.swing.JDialog" name="jd_mesa">
       <Properties>
+        <Property name="defaultCloseOperation" type="int" value="2"/>
         <Property name="title" type="java.lang.String" value="Seleccione la Mesa"/>
       </Properties>
 
@@ -149,6 +150,13 @@
         </Component>
       </SubComponents>
     </Container>
+    <Container class="javax.swing.JToolBar" name="jToolBar1">
+      <Properties>
+        <Property name="rollover" type="boolean" value="true"/>
+      </Properties>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
+    </Container>
   </NonVisualComponents>
   <Properties>
     <Property name="title" type="java.lang.String" value="Agregar Pedido Mesa"/>
@@ -192,7 +200,7 @@
                   <Group type="102" attributes="0">
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel1" pref="368" max="32767" attributes="0"/>
+                      <Component id="jPanel1" pref="388" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -314,7 +322,7 @@
                       <Component id="jTextField1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="308" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="332" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" pref="56" max="-2" attributes="0"/>

@@ -14,6 +14,7 @@ import javax.swing.RowSorter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import render_tablas.render_ventas;
 
 /**
  *
@@ -256,7 +257,21 @@ public class cl_venta {
 
             c_conectar.cerrar(st);
             c_conectar.cerrar(rs);
-            tabla.setModel(mostrar);
+           
+              tabla.setModel(mostrar);
+             tabla.getColumnModel().getColumn(0).setPreferredWidth(100);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(100);
+            tabla.getColumnModel().getColumn(3).setPreferredWidth(100);
+            tabla.getColumnModel().getColumn(4).setPreferredWidth(100);
+            tabla.getColumnModel().getColumn(5).setPreferredWidth(100);
+            tabla.getColumnModel().getColumn(6).setPreferredWidth(100);
+         
+
+            
+          tabla.setDefaultRenderer(Object.class, new render_ventas());
+           
+             
         } catch (SQLException ex) {
             System.out.println(ex);
             JOptionPane.showMessageDialog(null, ex);

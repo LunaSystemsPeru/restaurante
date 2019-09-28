@@ -11,6 +11,7 @@ import forms.frm_reg_platos;
 import clases.cl_varios;
 import clases.cl_venta;
 import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +25,7 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
     String sql;
     int fila = -1;
     String fecha = c_varios.getFechaActual();
+    private String query;
 
     /**
      * Creates new form frm_ver_platos
@@ -35,7 +37,7 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
                 + "inner join cliente as cl on cl.idcliente = v.idcliente "
                 + "inner join empleados as em on em.idempleados = v.idempleados "
                 + "where v.fecha = '" + fecha + "'";
-        c_venta.mostrar(tbl_plato, sql);
+        c_venta.mostrar(tbl_pedido, sql);
     }
 
     /**
@@ -50,7 +52,7 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         txt_bus = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tbl_plato = new javax.swing.JTable();
+        tbl_pedido = new javax.swing.JTable();
         jToolBar1 = new javax.swing.JToolBar();
         btn_ver_detalle = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -58,27 +60,27 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
         btn_eliminar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btn_salir = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbx_boton = new javax.swing.JComboBox<>();
+        cbx_tipo = new javax.swing.JComboBox<>();
 
-        setTitle("Ver Pedidos del Dia");
+        setTitle("Ver Venta del Dia");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/find.png"))); // NOI18N
         jLabel1.setText("Buscar:");
 
         txt_bus.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_busKeyTyped(evt);
-            }
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_busKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_busKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_busKeyTyped(evt);
+            }
         });
 
-        tbl_plato.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_pedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -89,12 +91,12 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tbl_plato.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbl_pedido.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbl_platoMouseClicked(evt);
+                tbl_pedidoMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(tbl_plato);
+        jScrollPane2.setViewportView(tbl_pedido);
 
         jToolBar1.setFloatable(false);
 
@@ -143,9 +145,19 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(btn_salir);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "POR COBRAR", "ANULADOS", "TODOS" }));
+        cbx_boton.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "POR COBRAR", "ANULADOS", "TODOS" }));
+        cbx_boton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_botonActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "POR FECHA", "POR NRO DOCUMENTO" }));
+        cbx_tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "POR FECHA", "POR NRO DOCUMENTO" }));
+        cbx_tipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbx_tipoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -155,15 +167,15 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbx_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txt_bus, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbx_boton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -174,10 +186,10 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(txt_bus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbx_tipo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbx_boton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -203,8 +215,38 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
 
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String bus = txt_bus.getText();
-            c_venta.mostrar(tbl_plato, sql);
+                   
+           
+                int tipo_busqueda = cbx_tipo.getSelectedIndex();
+                if (tipo_busqueda == 0) {
+                    if (bus.length() == 10) {
+                        // bus = c_varios.fecha_myql(bus);
+                        query = "select v.idventa, v.fecha, ds.abreviatura, v.serie, v.numero, v.idmesa, cl.nombre, em.usuario, v.estado, v.total, v.idpedido from venta as v "
+                                + "inner join documento_sunat as ds on ds.idcomprobante = v.idcomprobante "
+                                + "inner join cliente as cl on cl.idcliente = v.idcliente "
+                                + "inner join empleados as em on em.idempleados = v.idempleados "
+                                + "where v.fecha = '" + bus + "'";
 
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Fecha no es correcta");
+                        txt_bus.selectAll();
+                        txt_bus.requestFocus();
+                    }
+                }
+
+                if (tipo_busqueda == 1) {
+                    query = "select v.idventa, v.fecha, ds.abreviatura, v.serie, v.numero, v.idmesa, cl.nombre, em.usuario, v.estado, v.total, v.idpedido from venta as v "
+                                + "inner join documento_sunat as ds on ds.idcomprobante = v.idcomprobante "
+                                + "inner join cliente as cl on cl.idcliente = v.idcliente "
+                                + "inner join empleados as em on em.idempleados = v.idempleados "
+                            + "where v.numero = '" + bus + "' ";
+                          
+                }
+                c_venta.mostrar(tbl_pedido, query);
+                txt_bus.setText("");
+     
+
+         
         }
     }//GEN-LAST:event_txt_busKeyPressed
 
@@ -222,26 +264,59 @@ public class frm_ver_ventas extends javax.swing.JInternalFrame {
         //        c_cliente.ver_clientes(t_clientes, query);
     }//GEN-LAST:event_txt_busKeyTyped
 
-    private void tbl_platoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_platoMouseClicked
+    private void tbl_pedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_pedidoMouseClicked
         // TODO add your handling code here:
-        fila = tbl_plato.getSelectedRow();
+        fila = tbl_pedido.getSelectedRow();
         btn_ver_detalle.setEnabled(true);
-    }//GEN-LAST:event_tbl_platoMouseClicked
+    }//GEN-LAST:event_tbl_pedidoMouseClicked
+
+    private void cbx_botonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_botonActionPerformed
+        int pedido = cbx_boton.getSelectedIndex();
+        // POR COBRAR
+        if (pedido == 0) {
+            query = "select v.idventa, v.fecha, ds.abreviatura, v.serie, v.numero, v.idmesa, cl.nombre, em.usuario, v.estado, v.total, v.idpedido from venta as v "
+                    + "inner join documento_sunat as ds on ds.idcomprobante = v.idcomprobante "
+                    + "inner join cliente as cl on cl.idcliente = v.idcliente "
+                    + "inner join empleados as em on em.idempleados = v.idempleados "
+                    + "where v.estado = '2'";
+        }
+        // ANULADOS
+        if (pedido == 1) {
+            query = "select v.idventa, v.fecha, ds.abreviatura, v.serie, v.numero, v.idmesa, cl.nombre, em.usuario, v.estado, v.total, v.idpedido from venta as v "
+                    + "inner join documento_sunat as ds on ds.idcomprobante = v.idcomprobante "
+                    + "inner join cliente as cl on cl.idcliente = v.idcliente "
+                    + "inner join empleados as em on em.idempleados = v.idempleados "
+                    + "where v.estado = '3'";
+
+        }
+        // TODOS
+        if (pedido == 2) {
+            query = "select v.idventa, v.fecha, ds.abreviatura, v.serie, v.numero, v.idmesa, cl.nombre, em.usuario, v.estado, v.total, v.idpedido from venta as v "
+                    + "inner join documento_sunat as ds on ds.idcomprobante = v.idcomprobante "
+                    + "inner join cliente as cl on cl.idcliente = v.idcliente "
+                    + "inner join empleados as em on em.idempleados = v.idempleados ";
+        }
+        c_venta.mostrar(tbl_pedido, query);
+    }//GEN-LAST:event_cbx_botonActionPerformed
+
+    private void cbx_tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbx_tipoActionPerformed
+        
+    }//GEN-LAST:event_cbx_tipoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_eliminar;
     private javax.swing.JButton btn_salir;
     private javax.swing.JButton btn_ver_detalle;
+    private javax.swing.JComboBox<String> cbx_boton;
+    private javax.swing.JComboBox<String> cbx_tipo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JTable tbl_plato;
+    private javax.swing.JTable tbl_pedido;
     private javax.swing.JTextField txt_bus;
     // End of variables declaration//GEN-END:variables
 }

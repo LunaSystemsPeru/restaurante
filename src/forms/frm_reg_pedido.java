@@ -285,6 +285,7 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         txt_cantidad = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jButton8 = new javax.swing.JButton();
+        jToolBar1 = new javax.swing.JToolBar();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -301,6 +302,7 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
         btn_eliminar = new javax.swing.JButton();
         btn_guardar = new javax.swing.JButton();
 
+        jd_mesa.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         jd_mesa.setTitle("Seleccione la Mesa");
 
         javax.swing.GroupLayout jd_mesaLayout = new javax.swing.GroupLayout(jd_mesa.getContentPane());
@@ -375,6 +377,8 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
             }
         });
         jd_producto_seleccionado.getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 140, 40));
+
+        jToolBar1.setRollover(true);
 
         setTitle("Agregar Pedido Mesa");
 
@@ -524,7 +528,7 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -562,7 +566,7 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -720,6 +724,7 @@ public class frm_reg_pedido extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JDialog jd_mesa;
     private javax.swing.JDialog jd_producto_seleccionado;
     private javax.swing.JLabel lbl_num_mesa;

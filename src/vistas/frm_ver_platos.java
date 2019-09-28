@@ -9,6 +9,7 @@ import clases.cl_platos;
 import forms.frm_reg_platos;
 import clases.cl_varios;
 import java.awt.event.KeyEvent;
+
 /**
  *
  * @author BACA VARGAS
@@ -19,18 +20,23 @@ public class frm_ver_platos extends javax.swing.JInternalFrame {
     cl_platos c_plato = new cl_platos();
     String sql;
     int fila = -1;
+
     /**
      * Creates new form frm_ver_platos
      */
     public frm_ver_platos() {
         initComponents();
-        sql="SELECT p.idplatos,p.descripcion, p.precio, cp.tipo FROM platos p INNER JOIN clas_platos cp"
+        sql = "SELECT p.idplatos,p.descripcion, p.precio, cp.tipo FROM platos p INNER JOIN clas_platos cp"
                 + " WHERE p.idclas_platos = cp.idclas_platos "
                 + "order by idplatos asc";
+
 //        sql = "select idplatos, idclas_platos.tipo, descripcion, precio "//, cantidad "
 //                + "from platos "
 //                + " order by idplatos asc";
         c_plato.ver_platos(tbl_plato, sql);
+         int numerofilas = tbl_plato.getRowCount();
+
+        txt_nro.setText("" + numerofilas);
     }
 
     /**
@@ -43,7 +49,6 @@ public class frm_ver_platos extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txt_bus = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -54,23 +59,27 @@ public class frm_ver_platos extends javax.swing.JInternalFrame {
         btn_eliminar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         jButton3 = new javax.swing.JButton();
+        txt_nro = new javax.swing.JLabel();
 
         jLabel2.setText("Encontados");
-
-        jLabel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/recursos/find.png"))); // NOI18N
         jLabel1.setText("Buscar:");
 
-        txt_bus.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt_busKeyTyped(evt);
+        txt_bus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_busActionPerformed(evt);
             }
+        });
+        txt_bus.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txt_busKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txt_busKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt_busKeyTyped(evt);
             }
         });
 
@@ -141,6 +150,8 @@ public class frm_ver_platos extends javax.swing.JInternalFrame {
         });
         jToolBar1.add(jButton3);
 
+        txt_nro.setText("jLabel3");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,8 +166,8 @@ public class frm_ver_platos extends javax.swing.JInternalFrame {
                         .addComponent(txt_bus, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2)
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txt_nro)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jToolBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -167,11 +178,11 @@ public class frm_ver_platos extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txt_bus, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_nro))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -199,11 +210,11 @@ public class frm_ver_platos extends javax.swing.JInternalFrame {
 
     private void txt_busKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_busKeyPressed
 
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-            String bus= txt_bus.getText();
-             sql = "select idplatos, idclas_platos, descripcion, precio, cantidad where descripcion like '%"+bus+"%'";
-        c_plato.ver_platos(tbl_plato, sql);
-            
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            String bus = txt_bus.getText();
+            sql = "select idplatos, idclas_platos, descripcion, precio, cantidad where descripcion like '%" + bus + "%'";
+            c_plato.ver_platos(tbl_plato, sql);
+
         }
     }//GEN-LAST:event_txt_busKeyPressed
 
@@ -236,6 +247,19 @@ public class frm_ver_platos extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btn_agreActionPerformed
 
+    private void txt_busActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_busActionPerformed
+        String bus = txt_bus.getText();
+        sql = "SELECT p.idplatos,p.descripcion, p.precio, cp.tipo FROM platos p INNER JOIN clas_platos cp"
+                + " WHERE p.idclas_platos = cp.idclas_platos "
+                + "order by idplatos asc ";
+
+        c_plato.ver_platos(tbl_plato, sql);
+        int numerofilas = tbl_plato.getRowCount();
+
+        txt_nro.setText("" + numerofilas);
+
+    }//GEN-LAST:event_txt_busActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_agre;
@@ -244,11 +268,11 @@ public class frm_ver_platos extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JTable tbl_plato;
     private javax.swing.JTextField txt_bus;
+    private javax.swing.JLabel txt_nro;
     // End of variables declaration//GEN-END:variables
 }
